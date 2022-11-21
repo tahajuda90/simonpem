@@ -16,11 +16,15 @@ Class MY_Model extends CI_Model{
         return $this->db->get($this->table)->result();
     }
     
-    function get_cond($cond){
+    function get_cond($cond,$arr = false){
         //$cond is array condition
         $this->db->where($cond);
         $this->db->order_by($this->primary, $this->order);
-        return $this->db->get($this->table)->result();
+        if ($arr) {
+            return $this->db->get($this->table)->result_array();
+        } else {
+            return $this->db->get($this->table)->result();
+        }
     }
     
     function get_by_id($id)
@@ -42,6 +46,21 @@ Class MY_Model extends CI_Model{
         }else{
             return $this->db->insert($this->table, $data);
         }        
+    }
+    
+    function insert_id($data,$exist=null){
+        
+        if($exist!=null){
+            if($this->count($exist) > 0){
+                return $this->get_cond($exist,true)[0][$this->primary];
+            }else{
+                $this->db->insert($this->table, $data);
+                return $this->db->insert_id();
+            }
+        }else{
+            $this->db->insert($this->table, $data);
+            return $this->db->insert_id();
+        }       
     }
     
     function update($id, $data)

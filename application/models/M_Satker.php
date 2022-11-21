@@ -1,7 +1,13 @@
 <?php
 
-/* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Scripting/EmptyPHP.php to edit this template
- */
+defined('BASEPATH') OR exit('No direct script access allowed');
 
+class M_Satker extends MY_Model{
+    
+    var $table = 'satuan_kerja';
+    var $primary = 'id_satker';
+    
+    public function __construct() {
+        parent::__construct();
+    }
+}

@@ -1,0 +1,46 @@
+html {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(238, 241, 255, 1) 0%,
+    rgba(212, 225, 252, 1) 47%,
+    rgba(214, 245, 251, 1) 100%
+  );
+  font-family: "Poppins", sans-serif;
+}
+
+.navbar {
+  min-height: 60px;
+  background: #bad1c2;
+  font-weight: bold;
+}
+
+.navbar .navbar-brand {
+  font-size: 24px;
+}
+
+.navbar .user {
+  position: absolute;
+  top: 10px;
+  right: 90px;
+}
+.breadcrumb a {
+  font-weight: bold;
+}
+
+.content {
+  border-radius: 20px;
+  background: #ffff;
+}
+.footer {
+  background: #333;
+  color: white;
+  padding-top: 15px;
+  margin-top: auto;
+}
