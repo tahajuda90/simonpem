@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8">
-        <h2>Kontrak Pekerjaan</h2>
+        <h2>Satuan Kerja</h2>
     </div>
     <div class="col-md-4">
         <nav aria-label="breadcrumb ">
@@ -20,10 +20,11 @@
     </div>
     <?php }?>
 </div>
-<?php
+<?php 
 if (empty($button)) {
-    $this->load->view('component/tabel/tabel_kntrkpkrj');
-} else {
-    $this->load->view('component/form/form_kntrkpkrj');
+    $this->load->view('component/tabel/tabel_satker');
+}else{
+    $this->load->view('component/form/form_satker');
 }
-?>
+
+        ?>
