@@ -1,10 +1,11 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_Rekanan extends MY_Model{
+class M_Pekerjaan extends MY_Model{
     
-    var $table = 'rekanan';
-    var $primary = 'id_rekanan';
+    var $table = 'pekerjaan';
+    var $primary = 'id_pkrj';
     
     public function __construct() {
         parent::__construct();

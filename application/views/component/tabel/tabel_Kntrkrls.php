@@ -3,26 +3,15 @@
 <div class="container my-4">
       <div class="content shadow p-4">
         
-        <div class="d-flex justify-content-end">
-            <form method="get" action="<?= base_url('C_Kontrak/tarik')?>" class="form-inline">
-            <div class="form-group mb-2 mr-2">
-              <input type="text" name="lls_id" class="form-control" placeholder="Tarik Kode Tender" />
-            </div>
-            <button type="submit" class="btn btn-primary mb-2">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </form>
-        </div>
         <table id="kontrakKerja" class="table table-bordered table-hover">
           <thead>
             <tr>
               <th>Kode</th>
               <th>Satuan Kerja</th>
               <th>Nama Paket</th>
-              <th>Nomor Kontrak</th>
               <th>Nilai Kontrak</th>
               <th>Tanggal</th>
-              <th>Action</th>
+              <th style="width: 10%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -34,14 +23,13 @@
                   Kode Sirup : <?=$kt->rup_id?>
                   </td>
                   <td><?=$kt->stk_nama?></td>
-                  <td><?=$kt->pkt_nama?></td>
-                  <td><?=$kt->kontrak_no?></td>
+                  <td><?=$kt->pkt_nama?><br><?=$kt->kontrak_no?></td>
                   <td><?= rupiah($kt->kontrak_nilai)?></td>
                   <td>Rencana : <?= fdateformat('m-Y',$kt->tanggal_awal_pengadaan)?>
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('C_Kontrak/edit/'.$kt->id_kontrak)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
+                  <td><a class="btn-sm p-1 btn-success" href="<?= base_url('C_Realisasi/uraian/'.$kt->id_kontrak)?>"><i class="fa-solid fa-plus"></i>Uraian</a></td>
               </tr>
               <?php    }
               }?>

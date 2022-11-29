@@ -18,6 +18,12 @@ class M_Kontrak extends MY_Model{
         $this->db->join($this->M_Satker->table,$this->M_Satker->table.'.id_satker = '.$this->M_Paket->table.'.id_satker','LEFT');
         return parent::get_all();
     }
+    
+    public function get_by_id($id) {
+        $this->db->select($this->table.'.*,'.$this->M_Paket->table.'.*');
+        $this->db->join($this->M_Paket->table,$this->M_Paket->table.'.id_paket = '.$this->table.'.id_paket','LEFT');
+        return parent::get_by_id($id);
+    }
 }
 
 

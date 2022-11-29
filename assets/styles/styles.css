@@ -13,6 +13,7 @@ body {
     rgba(214, 245, 251, 1) 100%
   );
   font-family: "Poppins", sans-serif;
+  font-size: 12px;
 }
 
 .navbar {

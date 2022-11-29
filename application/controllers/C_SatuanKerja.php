@@ -51,6 +51,11 @@ class C_SatuanKerja extends CI_Controller {
             $this->edit($data['satker']->id_satker);
         }else{            
             $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon'));
+            if($this->M_Satker->update($data['satker']->id_satker,$satker)){
+                $this->index();
+            }else{
+                $this->edit($data['satker']->id_satker);
+            }
         }
     }
     

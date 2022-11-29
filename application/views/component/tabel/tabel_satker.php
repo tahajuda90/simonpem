@@ -18,13 +18,13 @@
         </thead>
         <tbody>
             <?php
-            if(isset($satker)){
+            if(!empty($satker)){
                 foreach($satker as $stk){ ?>
             <tr>
                 <td><?=$stk->stk_nama?></td>
                 <td><?=$stk->stk_telepon?></td>
                 <td><?=$stk->stk_alamat?></td>
-                <td><a class="btn btn-warning" href="<?= base_url('C_SatuanKerja/edit/'.$stk->id_satker)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
+                <td><a class="btn-xs p-1 btn-warning" href="<?= base_url('C_SatuanKerja/edit/'.$stk->id_satker)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
             </tr>        
             <?php    }
             }
