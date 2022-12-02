@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/dataTables.bootstrap4.css" >    
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.css" />
 <div class="container my-4">
       <div class="content shadow p-4">
         
@@ -29,7 +27,10 @@
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a class="btn-sm p-1 btn-success" href="<?= base_url('C_Realisasi/uraian/'.$kt->id_kontrak)?>"><i class="fa-solid fa-plus"></i>Uraian</a></td>
+                  <td><a class="btn-sm p-1 btn-success" href="<?= base_url('C_Realisasi/uraian/'.$kt->id_kontrak)?>"><i class="fa-solid fa-plus"></i>Uraian</a>
+                  <br>
+                  <a class="btn-sm p-1 btn-primary" href="<?= base_url('C_Laporan/laporan/'.$kt->id_kontrak)?>"><i class="fa-solid fa-note-sticky"></i>Laporan</a>
+                  </td>
               </tr>
               <?php    }
               }?>

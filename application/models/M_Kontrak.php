@@ -24,6 +24,13 @@ class M_Kontrak extends MY_Model{
         $this->db->join($this->M_Paket->table,$this->M_Paket->table.'.id_paket = '.$this->table.'.id_paket','LEFT');
         return parent::get_by_id($id);
     }
+    
+    public function update($id, $data) {
+        $data['kontrak_tanggal'] = fdatetimetodb($data['kontrak_tanggal']);
+        $data['kontrak_mulai'] = fdatetimetodb($data['kontrak_mulai']);
+        $data['kontrak_akhir'] = fdatetimetodb($data['kontrak_akhir']);
+        return parent::update($id, $data);
+    }
 }
 
 

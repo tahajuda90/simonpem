@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/dataTables.bootstrap4.css" >    
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.css" />
 <div class="container my-4">
       <div class="content shadow p-4">
         

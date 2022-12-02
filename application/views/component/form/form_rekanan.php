@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/bootstrap-datepicker/css/bootstrap-datepicker.css"/>
         <div class="content shadow p-4 my-4">
           <form class="needs-validation" novalidate>
             <div class="form-row">

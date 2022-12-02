@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/dataTables.bootstrap4.css" >    
 <div class="content shadow p-4 my-4">
       <div class="d-flex justify-content-end">
         <button class="btn btn-primary mb-2">

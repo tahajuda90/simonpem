@@ -24,6 +24,12 @@ $("#pekerjaanAwal").datepicker({
     todayHighlight: true,
 });
 
+$("#pekerjaanAkhir").datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true,
+});
+
 $("#akta").datepicker({
     format: "dd-mm-yyyy",
     autoclose: true,

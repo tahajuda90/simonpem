@@ -8,7 +8,11 @@
       rel="stylesheet"
       href="<?= base_url('assets/') ?>vendor/bootstrap-4.6.2-dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="<?= base_url('assets/')?>fontawesome/css/all.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/dropzone/dist/min/dropzone.min.css" />        
+<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/bootstrap-datepicker/css/bootstrap-datepicker.css"/>
+<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/dataTables.bootstrap4.css" >    
+<link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.css" />    
+<link rel="stylesheet" href="<?= base_url('assets/')?>fontawesome/css/all.css" />
     <link rel="stylesheet" href="<?= base_url('assets/') ?>styles/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
