@@ -21,9 +21,11 @@
     <?php }?>
 </div>
 <?php
-if (empty($button)) {
-    $this->load->view();
-} else {
+if (empty($button) && isset($kontrak)) {
+    $this->load->view('component/tabel/tabel_laporan');
+} else if(empty($button)) {
+    $this->load->view('component/tabel/tabel_rincilpr');
+}else {
     $this->load->view('component/form/form_laporan');
 }
 ?>

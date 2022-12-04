@@ -1,5 +1,5 @@
 <div class="content shadow p-4 my-4">
-    <form method="post" action="<?=$action?>" class="needs-validation" novalidate>
+    <form method="post" name="realisasi" id="realisasi" action="<?=$action?>" class="needs-validation" novalidate>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button
@@ -202,12 +202,8 @@
                                 <input
                                     type="text"
                                     class="form-control"
-                                    name="bobot"
-                                    required
+                                    name="<?=$pkj->id_pkrj?>"
                                     />
-                                <div class="invalid-feedback">
-                                    Field tidak boleh kosong.
-                                </div>
                             </td>
                         </tr>
                         <?php    }
@@ -216,7 +212,7 @@
                     </tbody>
                 </table>
             </div>
-
+            <input type="hidden" id="id_lpr" name="id_lpr">
             <!-- tab form upload -->
             <div
                 class="tab-pane fade"
@@ -247,5 +243,47 @@
 <script src="<?= base_url('assets/') ?>script/validateForm.js"></script>
 <script src="<?= base_url('assets/') ?>script/datePicker.js"></script>
 <script type="text/javascript">
-    Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
+$(document).ready(function () {
+    var myDropzone =  new Dropzone(("div#uploadBukti"),{
+        url:'<?= base_url('C_Laporan/upload')?>',
+        paramName: 'image',
+        autoProcessQueue: false,
+        uploadMultiple: false,
+        parallelUploads: 10,
+        acceptedFiles: 'image/*',
+        method:"post",
+        init: function(){
+            var myDropzone = this;
+            $("form[name='realisasi']").submit(function(event) {
+                event.preventDefault();
+                URL = $("#realisasi").attr('action');
+                formData = $('#realisasi').serialize();
+                $.ajax({
+                    type:'POST',
+                    url:URL,
+                    data:formData,
+                    success:function(result){
+                        hasil = JSON.parse(result);
+                        if(hasil.status === 'success'){
+                            $("#id_lpr").val(hasil.id_lpr);
+                            myDropzone.processQueue();
+                        }else{
+                            console.log("error");
+                        }
+                    }
+                });
+            });
+            this.on('sending', function(file, xhr, formData){
+                let id_lpr = document.getElementById('id_lpr').value;
+                formData.append('id_lpr',id_lpr);
+            });
+            this.on("success", function (file, response) {});
+            this.on("queuecomplete", function () {});
+            this.on("sendingmultiple", function() {});
+            this.on("successmultiple", function(files, response) {});
+            this.on("errormultiple", function(files, response) {});
+        }
+    });
+});
 </script>

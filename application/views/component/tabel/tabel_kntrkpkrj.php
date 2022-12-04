@@ -6,7 +6,7 @@
             <div class="form-group mb-2 mr-2">
               <input type="text" name="lls_id" class="form-control" placeholder="Tarik Kode Tender" />
             </div>
-            <button type="submit" class="btn btn-primary mb-2">
+            <button type="submit" id="cari" class="btn btn-primary mb-2">
               <i class="fa-solid fa-magnifying-glass"></i>
             </button>
           </form>
@@ -55,9 +55,10 @@
         $('#kontrakKerja').DataTable();
         $('#cari').on('click',function(e){
             Swal.fire({
-            title: 'Auto close alert!',
-            html: 'I will close in <b></b> milliseconds.',
-            timer: 20000,
+            title: 'Tarik Data Tender !',
+            html: 'Tunggu Beberapa Saat !',
+            allowOutsideClick: false,
+            timer: 40000,
             timerProgressBar: true,
             didOpen: ()=>{
                 Swal.showLoading();
@@ -65,12 +66,24 @@
             willClose:()=>{
                 clearInterval(timerInterval);
             }
-        }).then((reuslt)=>{
+        }).then((result)=>{
             if(result.dismiss === Swal.DismissReason.timer){
-                console.log('colse by eye');
+                console.log('close by eye');
             }
         });
         });
         
+        <?php if($this->session->flashdata('error_tarik')){ ?>
+         Swal.fire({
+            title:'<?=$this->session->flashdata('error_tarik')?>',
+            icon: 'error', 
+            showCancelButton: true,
+            confirmButtonText: 'Tambah'             
+         }).then((result)=>{
+             if(result.isConfirmed){
+                 window.location.href = "<?= base_url('C_Kontrak/create')?>";
+             }
+         });       
+        <?php } ?>
     });
     </script>

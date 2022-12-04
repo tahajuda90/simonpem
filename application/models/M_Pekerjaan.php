@@ -10,4 +10,9 @@ class M_Pekerjaan extends MY_Model{
     public function __construct() {
         parent::__construct();
     }
+    
+    public function id_only($cond){
+        $this->db->select($this->primary);
+        return array_column($this->get_cond($cond,true), $this->primary);
+    }
 }

@@ -6,3 +6,7 @@ function metode(){
 function pembayaran(){
     return array(1=>'Bulanan',2=>'Termin',3=>'Sekaligus');
 }
+
+function sanksi(){
+    return array(1=>'Keterlambatan',2=>'Lainnya');
+}

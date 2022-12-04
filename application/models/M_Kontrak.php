@@ -9,7 +9,7 @@ class M_Kontrak extends MY_Model{
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Satker','M_Paket'));
+        $this->load->model(array('M_Satker','M_Paket','M_Rekanan'));
     }
     
     public function get_all() {
@@ -20,8 +20,10 @@ class M_Kontrak extends MY_Model{
     }
     
     public function get_by_id($id) {
-        $this->db->select($this->table.'.*,'.$this->M_Paket->table.'.*');
+        $this->db->select($this->table.'.*,'.$this->M_Paket->table.'.*,'.$this->M_Satker->table.'.stk_nama,'.$this->M_Rekanan->table.'.*');
         $this->db->join($this->M_Paket->table,$this->M_Paket->table.'.id_paket = '.$this->table.'.id_paket','LEFT');
+        $this->db->join($this->M_Satker->table,$this->M_Satker->table.'.id_satker = '.$this->M_Paket->table.'.id_satker','LEFT');
+        $this->db->join($this->M_Rekanan->table,$this->M_Rekanan->table.'.id_rekanan = '.$this->table.'.id_rekanan','LEFT');
         return parent::get_by_id($id);
     }
     

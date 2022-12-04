@@ -109,7 +109,7 @@ class C_Kontrak extends CI_Controller {
                 $this->edit($this->M_Kontrak->insert_id($kntrk, array('lls_id' => $kntrk->lls_id)));
             } else {
                 $this->session->set_flashdata('error_tarik',$result->data);
-                $this->index();
+                redirect('C_Kontrak');
             }
         }
     }
