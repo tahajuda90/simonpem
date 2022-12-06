@@ -1,6 +1,6 @@
       <div class="content shadow p-4 my-4">
           <button class="btn btn-warning mb-2">
-            <a href="" class="text-decoration-none text-white"
+              <a href="<?= base_url('C_Laporan/laporan_edit/'.$laporan->id_lpr)?>" class="text-decoration-none text-white"
             >Ubah <span class="pl-2"><i class="fa-solid fa-edit"></i></span
           ></a>
         </button>

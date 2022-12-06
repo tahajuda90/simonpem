@@ -22,7 +22,7 @@
 </div>
 <?php
 if (empty($button)) {
-    $this->load->view('component/tabel/tabel_Kntrkrls');
+    $this->load->view('component/tabel/tabel_kntrkrls');
 } else {
     $this->load->view('component/form/form_kntrkpkrj');
 }

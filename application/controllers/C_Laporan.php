@@ -33,8 +33,15 @@ class C_Laporan extends CI_Controller {
         $this->load->view('main',$data);
     }
     
-    public function laporan_edit(){
-        
+    public function laporan_edit($id_lpr){
+//        $bukti = $this->M_Bukti->get_cond(array('id_lpr'=>$data['laporan']->id_lpr));
+        $data['laporan'] = $this->M_Laporan->get_by_id($id_lpr);
+        $data['lapPeker'] = $this->M_LapPeker->get_cond(array('id_lpr'=>$data['laporan']->id_lpr));
+        $data['bukti'] = empty($this->M_Bukti->get_cond(array('id_lpr'=>$data['laporan']->id_lpr))) ? array() : $this->M_Bukti->get_cond(array('id_lpr'=>$data['laporan']->id_lpr));
+        $data['action'] = base_url('C_Laporan/store_edit/'.$data['laporan']->id_lpr);
+        $data['button'] = 'Ubah';
+        $data['page'] = 'page/laprealisasi';
+        $this->load->view('main',$data);
     }
     
     public function store($id_kontrak){
@@ -58,7 +65,20 @@ class C_Laporan extends CI_Controller {
         }
     }
     
-    public function store_edit(){
+    public function store_edit($id_lpr){
+        $this->form_validation->set_rules('rencana', 'Rencana', 'trim|required');
+        $data['laporan'] = $this->M_Laporan->get_by_id($id_lpr);
+        $pkrj = $this->input->post($this->M_LapPeker->id_only(array('id_lpr'=>$data['laporan']->id_lpr)));
+        if ($this->form_validation->run() == FALSE) {
+        echo json_encode(array('status' => "error", 'msg' => validation_errors()));        
+        }else{
+            $laporan = $this->input->post(array('rencana', 'realisasi', 'keterangan', 'bulan', 'minggu', 'tanggal_awal', 'tanggal_akhir', 'kendala'));
+            $this->M_Laporan->update($data['laporan']->id_lpr,$laporan);
+            foreach ($pkrj as $key=>$val){
+                $this->M_LapPeker->update($key,array('bobot'=>$val));
+            }
+            echo json_encode(array('status' => "success", 'id_lpr' => $data['laporan']->id_lpr));
+        }
         
     }
     
@@ -70,19 +90,33 @@ class C_Laporan extends CI_Controller {
         $config['upload_path'] = $uplpath;
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
 //		$config['max_size']             = 10000;
-        $config['encrypt_name']         = TRUE;
+        $config['encrypt_name'] = TRUE;
 //                $config['file_name']            = 'custom';
 
         $this->load->library('upload', $config);
 
+        $id_lpr = $this->input->post('id_lpr');
+        $lap = $this->M_Laporan->get_by_id($id_lpr);
         if ($this->upload->do_upload('image')) {
-            $id_lpr=$this->input->post('id_lpr');
-            $image=$this->upload->data('file_name');
-            $this->M_Bukti->insert(array('id_lpr'=>$id_lpr,'image'=>$image));
+            $image = $this->upload->data('file_name');
+            $this->M_Bukti->insert(array('id_lpr' => $id_lpr, 'image' => $image));
+            echo json_encode(array('status'=>'success','imgdata'=>$this->upload->data('file_name'),'id_kontrak'=>$lap->id_kontrak));
+//            redirect('C_Laporan/laporan_rinci/'.$lap->id_lpr);
+            
         } else {
             $error = array('error' => $this->upload->display_errors());
-            print_r($error);
+            echo json_encode(array('status'=>'error','msg'=>$error,'id_kontrak'=>$lap->id_kontrak));
+//            redirect('C_Laporan/laporan_edit/'.$lap->id_lpr);
         }
+    }
+    
+    public function delete_bukti($id_bkti){
+        $bukti = $this->M_Bukti->get_by_id($id_bkti);
+        $id_lpr = $bukti->id_lpr;
+        if(unlink(FCPATH . '/assets/gambar/'.$bukti->image)){
+            $this->M_Bukti->delete($bukti->id_bkti);
+        }
+        redirect('C_Laporan/laporan_edit/'.$id_lpr);
     }
 
 }

@@ -193,7 +193,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if(!empty($pekerjaan)){
+                        <?php if(!empty($pekerjaan) && isset($pekerjaan)){
                             foreach($pekerjaan as $pkj){ ?>
                         <tr>
                             <td><?=$pkj->uraian_pkrj?></td>
@@ -203,6 +203,20 @@
                                     type="text"
                                     class="form-control"
                                     name="<?=$pkj->id_pkrj?>"
+                                    />
+                            </td>
+                        </tr>
+                        <?php    }} else if(!empty($lapPeker) && isset($lapPeker)){
+                            foreach($lapPeker as $pkj){ ?>
+                                <tr>
+                            <td><?=$pkj->uraian_pkrj?></td>
+                            <td><?=$pkj->satuan?></td>
+                            <td>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    name="<?=$pkj->id_lpkr?>"
+                                    value="<?=$pkj->bobot?>"
                                     />
                             </td>
                         </tr>
@@ -228,6 +242,29 @@
                         <i class="fa-solid fa-cloud-arrow-up"></i>
                         Drag &amp; Drop here or click
                     </div>
+                </div>
+                <div class="row">
+                    <?php if(!empty($bukti)){
+                        foreach($bukti as $bkt){ ?>
+                            <div class="col-md-3">
+                        <div class="wrapper">
+                            <a
+                                href="<?= base_url('C_Laporan/delete_bukti/'.$bkt->id_bkti)?>"
+                                data-toggle="tooltip"
+                                data-placement="top"
+                                title="Delete"
+                                ><i class="fa-regular fa-rectangle-xmark fa-2x"></i
+                                ></a>
+                            <img
+                                class="img-thumbnail"
+                                src="<?= base_url('assets/gambar/').$bkt->image?>"
+                                alt="Another alt text"
+                                />
+                        </div>
+                    </div>
+                    <?php    }
+                    }?>
+                    
                 </div>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-primary" name="submit" type="submit">
@@ -267,7 +304,11 @@ $(document).ready(function () {
                         hasil = JSON.parse(result);
                         if(hasil.status === 'success'){
                             $("#id_lpr").val(hasil.id_lpr);
-                            myDropzone.processQueue();
+                            if(myDropzone.files.length > 0 ){
+                                myDropzone.processQueue();
+                            }else{
+                                window.location.href = "<?= base_url('C_Laporan/laporan_edit/')?>"+hasil.id_lpr;
+                            }                            
                         }else{
                             console.log("error");
                         }
@@ -278,11 +319,24 @@ $(document).ready(function () {
                 let id_lpr = document.getElementById('id_lpr').value;
                 formData.append('id_lpr',id_lpr);
             });
-            this.on("success", function (file, response) {});
+            this.on("success", function (file, response) {
+                hasil = JSON.parse(response);
+                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+            });
+            this.on("error", function (file, response) {
+                hasil = JSON.parse(response);
+                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+            });
             this.on("queuecomplete", function () {});
             this.on("sendingmultiple", function() {});
-            this.on("successmultiple", function(files, response) {});
-            this.on("errormultiple", function(files, response) {});
+            this.on("successmultiple", function(files, response) {
+                hasil = JSON.parse(response);
+                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+            });
+            this.on("errormultiple", function(files, response) {
+                hasil = JSON.parse(response);
+                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+            });
         }
     });
 });

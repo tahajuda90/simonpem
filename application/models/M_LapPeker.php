@@ -13,9 +13,14 @@ class M_LapPeker extends MY_Model {
     }
     
     public function get_cond($cond, $arr = false) {
-        $this->db->select($this->table.".*,".$this->M_Pekerjaan->table.'.uraian_pkrj');
+        $this->db->select($this->table.".*,".$this->M_Pekerjaan->table.'.uraian_pkrj,'.$this->M_Pekerjaan->table.'.satuan');
         $this->db->join($this->M_Pekerjaan->table,$this->M_Pekerjaan->table.'.id_pkrj = '.$this->table.'.id_pkrj','LEFT');
         return parent::get_cond($cond, $arr);
+    }
+    
+    public function id_only($cond){
+        $this->db->select($this->primary);
+        return array_column($this->get_cond($cond,true), $this->primary);
     }
 
 }
