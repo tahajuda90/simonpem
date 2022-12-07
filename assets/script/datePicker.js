@@ -41,3 +41,9 @@ $("#tanggalAkta").datepicker({
     autoclose: true,
     todayHighlight: true,
 });
+
+$("#adendum").datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true,
+});
