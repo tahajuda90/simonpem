@@ -124,7 +124,7 @@
                                 name="tanggal_awal"
                                 class="form-control"
                                 required
-                                value="<?=$laporan->tanggal_awal?>"
+                                value="<?= strlen($laporan->tanggal_awal) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $laporan->tanggal_awal)?>"
                                 />
                             <div class="invalid-feedback">
                                 Field tidak boleh kosong.
@@ -148,7 +148,7 @@
                                 name="tanggal_akhir"
                                 class="form-control"
                                 required
-                                value="<?=$laporan->tanggal_akhir?>"
+                                value="<?= strlen($laporan->tanggal_akhir) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $laporan->tanggal_akhir)?>"
                                 />
                             <div class="invalid-feedback">
                                 Field tidak boleh kosong.

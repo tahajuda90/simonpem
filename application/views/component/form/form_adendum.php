@@ -1,5 +1,5 @@
 <div class="content shadow p-4 my-4">
-          <form class="needs-validation" novalidate>
+    <form method="post" action="<?=$action?>" enctype="multipart/form-data" class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label>Nomor Adendum</label>
@@ -29,7 +29,7 @@
                     name="tanggal_adendum"
                     class="form-control"
                     required
-                    value="<?=$adendum->tanggal_adendum?>"
+                    value="<?= strlen($adendum->tanggal_adendum) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $adendum->tanggal_adendum)?>"
                   />
                   <div class="invalid-feedback">Field tidak boleh kosong.</div>
                 </div>
@@ -99,7 +99,7 @@
                   type="file"
                   class="form-control-file"
                   name="dokumen"
-                  required
+                  <?php if($button !== 'Update'){echo'required';}?>
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
               </div>

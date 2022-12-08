@@ -21,9 +21,11 @@
     <?php }?>
 </div>
 <?php
-if (empty($button)) {
+if (empty($button) && isset($adendum)) {
+    $this->load->view('component/tabel/tabel_adendum');
+} else if(empty ($button)){
     $this->load->view('component/tabel/tabel_kntrkadd');
-} else {
+}else {
     $this->load->view('component/form/form_adendum');
 }
 ?>
