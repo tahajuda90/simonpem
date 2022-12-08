@@ -47,3 +47,9 @@ $("#adendum").datepicker({
     autoclose: true,
     todayHighlight: true,
 });
+
+$("#sanksi").datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true,
+});

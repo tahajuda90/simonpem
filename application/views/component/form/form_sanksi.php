@@ -1,5 +1,5 @@
         <div class="content shadow p-4 my-4">
-          <form class="needs-validation" novalidate>
+            <form method="post" action="<?=$action?>" enctype="multipart/form-data" class="needs-validation" novalidate>
             <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label>Nomor Sanksi / Denda</label>
@@ -8,6 +8,7 @@
                   name="nmr_denda"
                   class="form-control"
                   required
+                  value="<?=$sanksi->nmr_denda?>"
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
               </div>
@@ -27,8 +28,8 @@
                     id="sanksi"
                     name="tanggal"
                     class="form-control"
-                    placeholder="DD/MM/YYYY"
                     required
+                    value="<?= strlen($sanksi->tanggal) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $sanksi->tanggal)?>"
                   />
                   <div class="invalid-feedback">Field tidak boleh kosong.</div>
                 </div>
@@ -39,8 +40,11 @@
                 <label>Jenis Sanksi / Denda</label>
                 <select class="custom-select" name="jns_sanksi" required>
                   <option selected disabled value="">Silahkan Pilih</option>
-                  <option>...</option>
-                  <option>...</option>
+                  <?php
+                        foreach(sanksi() as $key=>$val){ ?>
+                        <option <?= $sanksi->jns_sanksi == $key ? 'selected' : '' ?> value="<?=$key?>"><?=$val?></option>
+                        <?php }
+                        ?>
                 </select>
                 <div class="invalid-feedback">Pilih salah satu.</div>
               </div>
@@ -51,6 +55,7 @@
                   name="sanksi"
                   class="form-control"
                   required
+                  value="<?=$sanksi->sanksi?>"
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
               </div>
@@ -62,6 +67,7 @@
                 name="denda_nilai"
                 class="form-control"
                 required
+                value="<?=$sanksi->denda_nilai?>"
               />
               <div class="invalid-feedback">Field tidak boleh kosong.</div>
             </div>
@@ -72,7 +78,7 @@
                 name="kendala"
                 rows="5"
                 required
-              ></textarea>
+              ><?=$sanksi->kendala?></textarea>
               <div class="invalid-feedback">Field tidak boleh kosong.</div>
             </div>
             <div class="form-row">
@@ -82,15 +88,18 @@
                   type="file"
                   class="form-control-file"
                   name="dokumen"
-                  required
+                  <?php if($button !== 'Update'){echo'required';}?>
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
               </div>
               <div class="col-auto mb-3 align-self-end ml-auto">
                 <button class="btn btn-primary" name="submit" type="submit">
-                  kirim
+                  <?=$button?>
                 </button>
               </div>
             </div>
           </form>
         </div>
+<script src="<?= base_url('assets/') ?>vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url('assets/') ?>script/validateForm.js"></script>
+<script src="<?= base_url('assets/') ?>script/datePicker.js"></script>

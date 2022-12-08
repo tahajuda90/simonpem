@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_Laporan extends MY_Model {
+class M_Sanksi extends MY_Model {
 
     var $table = 'sanksi';
     var $primary = 'id_sknsi';
@@ -13,7 +13,7 @@ class M_Laporan extends MY_Model {
     }
     
      public function kontrak(){
-        $this->db->select('count('.$this->table.'.id_sknsi'.') as jml_sknsi');
+        $this->db->select('count('.$this->table.'.id_snksi'.') as jml_snksi');
         $this->db->join($this->table,$this->table.'.id_kontrak = '.$this->M_Kontrak->table.'.id_kontrak','LEFT');
         $this->db->group_by($this->M_Kontrak->table.'.id_kontrak');
         return $this->M_Kontrak->get_all();

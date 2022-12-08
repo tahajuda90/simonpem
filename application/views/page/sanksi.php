@@ -20,3 +20,12 @@
     </div>
     <?php }?>
 </div>
+<?php
+if (empty($button) && isset($sanksi)) {
+    $this->load->view('component/tabel/tabel_sanksi');
+} else if(empty ($button)){
+    $this->load->view('component/tabel/tabel_kntrksks');
+}else {
+    $this->load->view('component/form/form_sanksi');
+}
+?>

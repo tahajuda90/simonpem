@@ -66,8 +66,24 @@ class C_Adendum extends CI_Controller {
         $this->load->view('main',$data);
     }
     
-    public function store_edit(){
-        
+    public function store_edit($id_addm){
+        $data['adendum'] = $this->M_Adendum->get_by_id($id_addm);
+        $this->form_validation->set_rules('nmr_adendum', 'Nomor Adendum', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            redirect(base_url('C_Adendum/adendum_update/'.$data['adendum']->id_addm));
+        }else{
+            $adendum = $this->input->post(array('nmr_adendum','tanggal_adendum','lama_durasi_penyerahan1','lama_durasi_pemeliharaan','kontrak_nilai','btk_pembayaran','kendala'));
+            $this->upload();
+            if(isset($_FILES['dokumen']['name'])){
+                $this->upload->do_upload('dokumen');
+                $adendum['dokumen'] = $this->upload->data('file_name');
+            }
+            if($this->M_Adendum->insert($adendum)){
+                redirect(base_url('C_Adendum/adendum/'.$data['adendum']->id_kontrak));
+            }else{
+                redirect(base_url('C_Adendum/adendum_edit/'.$data['adendum']->id_addm));
+            }
+        }
     }
     
     public function delete(){

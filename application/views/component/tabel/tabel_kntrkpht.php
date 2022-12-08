@@ -27,11 +27,12 @@
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a class="btn-sm p-0 btn-success" href="<?= base_url('C_Realisasi/uraian/'.$kt->id_kontrak)?>"><i class="fa-solid fa-plus"></i>Uraian</a>
-                  <br><br>
+                  <td>                      
                   <?php
-                  if($kt->jml_pkrj !=0){
-                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Laporan/laporan/'.$kt->id_kontrak).'"><i class="fa-solid fa-note-sticky"></i>Laporan</a>';
+                  if($kt->jml_prakhir == 0){
+                      echo '<a class="btn-sm p-0 btn-success" href="'.base_url('C_Perhitungan/hitung_create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
+                  }else{                      
+                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Perhitungan/hitung/'.$kt->id_kontrak).'">Adendum</a>';
                   }
                   ?>
                   </td>
@@ -48,24 +49,6 @@
    <script type="text/javascript">
     $( document ).ready(function() {
         $('#kontrakKerja').DataTable();
-        $('#cari').on('click',function(e){
-            Swal.fire({
-            title: 'Auto close alert!',
-            html: 'I will close in <b></b> milliseconds.',
-            timer: 20000,
-            timerProgressBar: true,
-            didOpen: ()=>{
-                Swal.showLoading();
-                },
-            willClose:()=>{
-                clearInterval(timerInterval);
-            }
-        }).then((reuslt)=>{
-            if(result.dismiss === Swal.DismissReason.timer){
-                console.log('colse by eye');
-            }
-        });
-        });
         
     });
     </script>

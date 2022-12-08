@@ -8,7 +8,7 @@
               <th>Satuan Kerja</th>
               <th>Nama Paket</th>
               <th>Nilai Kontrak</th>
-              <th>Tanggal</th>
+              <th>Tanggal Pengadaan</th>
               <th style="width: 10%">Action</th>
             </tr>
           </thead>

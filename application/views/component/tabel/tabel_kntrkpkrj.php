@@ -19,7 +19,7 @@
               <th>Nama Paket</th>
               <th>Nomor Kontrak</th>
               <th>Nilai Kontrak</th>
-              <th>Tanggal</th>
+              <th>Tanggal Pengadaan</th>
               <th>Action</th>
             </tr>
           </thead>
