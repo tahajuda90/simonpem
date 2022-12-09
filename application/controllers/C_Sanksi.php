@@ -16,7 +16,10 @@ class C_Sanksi extends CI_Controller {
     }
     
     public function sanksi($id_kontrak){
-        
+        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
+        $data['sanksi'] = $this->M_Sanksi->get_cond(array($this->M_Sanksi->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['page'] = 'page/sanksi';
+        $this->load->view('main',$data);
     }
     
     public function sanksi_create($id_kontrak){
@@ -35,6 +38,7 @@ class C_Sanksi extends CI_Controller {
             redirect(base_url('C_Sanksi/sanksi_create/'.$data['kontrak']->id_kontrak));
         }else{
             $sanksi = $this->input->post(array('nmr_denda','tanggal','jns_sanksi','sanksi','denda_nilai','kendala'));
+            $sanksi['id_kontrak'] = $data['kontrak']->id_kontrak;
             $this->upload();
             $done = true;
             if(isset($_FILES['dokumen']['name'])){
