@@ -78,7 +78,7 @@ class C_Adendum extends CI_Controller {
                 $this->upload->do_upload('dokumen');
                 $adendum['dokumen'] = $this->upload->data('file_name');
             }
-            if($this->M_Adendum->insert($adendum)){
+            if($this->M_Adendum->update($data['adendum']->id_addm,$adendum)){
                 redirect(base_url('C_Adendum/adendum/'.$data['adendum']->id_kontrak));
             }else{
                 redirect(base_url('C_Adendum/adendum_edit/'.$data['adendum']->id_addm));

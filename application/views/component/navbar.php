@@ -27,7 +27,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">User Manajemen </a>
+                <a class="nav-link" href="<?= base_url('Akses')?>">User Manajemen </a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -40,9 +40,9 @@
                 Master
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="kontrak.html">Kontrak</a>
-                <a class="dropdown-item" href="satuankerja.html">Satuan Keja</a>
-                <a class="dropdown-item" href="penyedia.html">Penyedia</a>
+                  <a class="dropdown-item" href="<?= base_url('C_Kontrak')?>">Kontrak</a>
+                  <a class="dropdown-item" href="<?= base_url('C_SatuanKerja')?>">Satuan Keja</a>
+                  <a class="dropdown-item" href="<?= base_url('C_Rekanan')?>">Penyedia</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -56,16 +56,16 @@
                 Laporan
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="realisasiPekerjaan.html"
+                  <a class="dropdown-item" href="<?= base_url('C_Realisasi')?>"
                   >Realisasi Pekerjaan</a
                 >
-                <a class="dropdown-item" href="adendum.html"
+                <a class="dropdown-item" href="<?= base_url('C_Adendum')?>"
                   >Adendum Pekerjaan</a
                 >
-                <a class="dropdown-item" href="sanksi.html"
+                <a class="dropdown-item" href="<?= base_url('C_Sanksi')?>"
                   >Sanksi / Denda Pekerjaan</a
                 >
-                <a class="dropdown-item" href="beritaAcara.html"
+                <a class="dropdown-item" href="<?= base_url('C_Perhitungan')?>"
                   >Berita Acara Perhitungan</a
                 >
               </div>

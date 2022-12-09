@@ -15,7 +15,10 @@ class C_Perhitungan extends CI_Controller {
     }
     
     public function hitung($id_kontrak){
-        
+        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
+        $data['hitung'] = $this->M_PerAkhir->get_cond(array($this->M_PerAkhir->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['page'] = 'page/perhitungan';
+        $this->load->view('main',$data);
     }
     
     public function hitung_create($id_kontrak){
@@ -28,15 +31,57 @@ class C_Perhitungan extends CI_Controller {
     }
     
     public function store($id_kontrak){
-        
+        $this->form_validation->set_rules('no_ba', 'Nomor Berita Acara', 'trim|required');
+        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
+        if ($this->form_validation->run() == FALSE) {
+            redirect(base_url('C_Perhitungan/hitung_create/'.$data['kontrak']->id_kontrak));
+        }else{
+            $hitung = $this->input->post(array('no_ba','tanggal','prosentase','hitung_nilai','kendala'));
+            $hitung['id_kontrak'] = $data['kontrak']->id_kontrak;
+            $this->upload();
+            $done = true;
+            if(isset($_FILES['dokumen']['name'])){
+                $this->upload->do_upload('dokumen');
+                $hitung['dokumen'] = $this->upload->data('file_name');
+                $this->M_PerAkhir->insert($hitung);
+                $done = true;
+            }else{
+                $done = false;
+            }
+            if($done){
+                redirect(base_url('C_Perhitungan/hitung/'.$data['kontrak']->id_kontrak));
+            }else{
+                redirect(base_url('C_Perhitungan/hitung_create/'.$data['kontrak']->id_kontrak));
+            }
+        }
     }
     
     public function hitung_update($id_prakhir){
-        
+        $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
+        $data['page'] = 'page/perhitungan';
+        $data['action'] = base_url('C_Perhitungan/store/'.$data['kontrak']->id_kontrak);
+        $data['button'] = 'Simpan';
+        $this->load->view('main',$data);
     }
     
     public function store_edit($id_prakhir){
-        
+        $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
+        $this->form_validation->set_rules('no_ba', 'Nomor Berita Acara', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            redirect(base_url('C_Perhitungan/hitung_update/'.$data['hitung']->id_prakhir));
+        }else{
+            $hitung = $this->input->post(array('no_ba','tanggal','prosentase','hitung_nilai','kendala'));
+            $this->upload();
+            if(isset($_FILES['dokumen']['name'])){
+                $this->upload->do_upload('dokumen');
+                $hitung['dokumen'] = $this->upload->data('file_name');
+            }
+            if($this->M_PerAkhir->update($data['hitung']->id_prakhir,$hitung)){
+                redirect(base_url('C_Perhitungan/hitung/'.$data['kontrak']->id_kontrak));
+            }else{
+                redirect(base_url('C_Perhitungan/hitung_create/'.$data['hitung']->id_prakhir));
+            }
+        }
     }
     
     public function delete($id_prakhir){

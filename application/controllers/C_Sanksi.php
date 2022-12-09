@@ -77,7 +77,7 @@ class C_Sanksi extends CI_Controller {
                 $this->upload->do_upload('dokumen');
                 $sanksi['dokumen'] = $this->upload->data('file_name');
             }
-            if($this->M_Sanksi->insert($sanksi)){
+            if($this->M_Sanksi->update($data['sanksi']->id_snksi,$sanksi)){
                 redirect(base_url('C_Sanksi/sanksi/'.$data['sanksi']->id_kontrak));
             }else{
                 redirect(base_url('C_Sanksi/sanksi_update/'.$data['sanksi']->id_snksi));
