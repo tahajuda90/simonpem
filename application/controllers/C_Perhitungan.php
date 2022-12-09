@@ -19,7 +19,12 @@ class C_Perhitungan extends CI_Controller {
     }
     
     public function hitung_create($id_kontrak){
-        
+        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
+        $data['hitung'] = (object)array('no_ba'=> set_value('no_ba'),'tanggal'=> set_value('tanggal'),'prosentase'=> set_value('prosentase'),'hitung_nilai'=> set_value('hitung_nilai'),'kendala'=>set_value('kendala'),'dokumen'=> set_value('dokumen'));
+        $data['page'] = 'page/perhitungan';
+        $data['action'] = base_url('C_Perhitungan/store/'.$data['kontrak']->id_kontrak);
+        $data['button'] = 'Simpan';
+        $this->load->view('main',$data);
     }
     
     public function store($id_kontrak){

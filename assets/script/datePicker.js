@@ -53,3 +53,10 @@ $("#sanksi").datepicker({
     autoclose: true,
     todayHighlight: true,
 });
+
+$("#beritaAcara").datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true,
+});
+

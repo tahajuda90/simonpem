@@ -1,7 +1,13 @@
     <nav class="navbar py-3 navbar-expand-lg navbar-light shadow-sm">
       <div class="container-fluid">
-        <a class="navbar-brand mr-5" href="#">LOGO APLIKASI</a>
-        <button
+        <a class="navbar-brand pb-2" href="#">
+          <img
+              src="<?= base_url('assets/navbar-logo.png')?>"
+            alt=""
+            width="200"
+            height="40"
+          />
+        </a><button
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -21,9 +27,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
-                >User Manajemen </a
-              >
+              <a class="nav-link" href="#">User Manajemen </a>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -36,24 +40,9 @@
                 Master
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Kontrak</a>
-                <a class="dropdown-item" href="#">Satuan Keja</a>
-                <a class="dropdown-item" href="#">Penyedia</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Monitoring
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Relasi Pekerjaan</a>
-                <a class="dropdown-item" href="#">Kendala Pekerjaan</a>
+                <a class="dropdown-item" href="kontrak.html">Kontrak</a>
+                <a class="dropdown-item" href="satuankerja.html">Satuan Keja</a>
+                <a class="dropdown-item" href="penyedia.html">Penyedia</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -67,10 +56,37 @@
                 Laporan
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Rekap Pekerjaan</a>
-                <a class="dropdown-item" href="#">Rekap Relasi Pekerjaan</a>
+                <a class="dropdown-item" href="realisasiPekerjaan.html"
+                  >Realisasi Pekerjaan</a
+                >
+                <a class="dropdown-item" href="adendum.html"
+                  >Adendum Pekerjaan</a
+                >
+                <a class="dropdown-item" href="sanksi.html"
+                  >Sanksi / Denda Pekerjaan</a
+                >
+                <a class="dropdown-item" href="beritaAcara.html"
+                  >Berita Acara Perhitungan</a
+                >
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Monitoring
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Ringkasan Kontrak</a>
                 <a class="dropdown-item" href="#"
-                  >Rekap Serah Terima Pekerjaan</a
+                  >Ringkasan Progress Pekerjaan</a
+                >
+                <a class="dropdown-item" href="#"
+                  >Laporan Realisasi pekerjaan</a
                 >
               </div>
             </li>
@@ -85,7 +101,7 @@
             aria-expanded="false"
           >
             <img
-                src="<?=base_url('assets/')?>picture.png"
+              src="<?=base_url('assets/')?>picture.png"
               width="40"
               height="40"
               class="rounded-circle"
