@@ -81,7 +81,7 @@
                 Monitoring
               </a>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Ringkasan Kontrak</a>
+                <a class="dropdown-item" href="<?= base_url('C_Ringkasan')?>">Ringkasan Kontrak</a>
                 <a class="dropdown-item" href="#"
                   >Ringkasan Progress Pekerjaan</a
                 >

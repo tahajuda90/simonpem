@@ -20,3 +20,6 @@
     </div>
     <?php }?>
 </div>
+<?php
+$this->load->view('component/tabel/tabel_ringkasan');
+?>
