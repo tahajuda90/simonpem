@@ -34,6 +34,7 @@ class M_PerAkhir extends MY_Model{
             $this->M_Masalah->update($prakhir->id_mslh,array('tanggal' => fdatetimetodb($data['tanggal_adendum']),'tahapan' => 'perhitungan','keterangan' => $data['kendala']));
         }
         unset($data['kendala']);
+         $data['tanggal'] = fdatetimetodb($data['tanggal']);
         return parent::update($id, $data);
     }
     

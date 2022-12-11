@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class C_Dashboard extends MY_Controller {
+class C_Ringkasan extends CI_Controller{
     
-    public function __construct(){
+    public function __construct() {
         parent::__construct();
     }
     
-    public function index(){
-        $data['page'] = 'page/dashboard';
+    public function index (){
+        $data['page'] = '';
         $this->load->view('main',$data);
     }
 }

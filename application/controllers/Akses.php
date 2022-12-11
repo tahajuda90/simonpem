@@ -27,10 +27,10 @@ class Akses extends CI_Controller {
         if ($this->form_validation->run() === TRUE) {
             $remember = (bool) $this->input->post('remember');
             if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
-                print_r('login');
+                redirect('C_Dashboard');
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('not_login');
+                redirect('Akses/login');
             }
         } else {
             $this->load->view('login');
@@ -43,9 +43,9 @@ class Akses extends CI_Controller {
     }
     
     public function create_user() {
-//        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-//            redirect('C_User/logout', 'refresh');
-//        }
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('C_User/logout', 'refresh');
+        }
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
         if ($identity_column !== 'email') {
@@ -82,9 +82,9 @@ class Akses extends CI_Controller {
     }
     
     public function edit_user($id) {
-//        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-//            redirect('C_User/logout', 'refresh');
-//        }
+        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
+            redirect('C_User/logout', 'refresh');
+        }
         $user = $this->ion_auth->user($id)->row();
         $this->form_validation->set_rules('id','id required','required');
         if ($this->input->post('password')) {

@@ -8,7 +8,7 @@
                 />
         </div>
         <div class="form-group">
-            <label>Password Lama</label>
+            <label>Password Baru</label>
             <input
                 id="passInput" type="password" name="new"
                 class="form-control"
@@ -16,7 +16,7 @@
             <input type="hidden" name="id" value="<?=$id_user?>">
         </div>
         <div class="form-group">
-            <label>Password Lama</label>
+            <label>Konfirmasi Password Baru</label>
             <input
                 id="passInput" type="password" name="new_confirm"
                 class="form-control"

@@ -108,8 +108,8 @@
             />
           </a>
           <div class="dropdown-menu" style="width: 60px">
-            <a class="dropdown-item" href="#">Ubah Password</a>
-            <a class="dropdown-item" href="#">Logout</a>
+              <a class="dropdown-item" href="<?= base_url('akses/change_password')?>">Ubah Password</a>
+            <a class="dropdown-item" href="<?= base_url('akses/logout')?>">Logout</a>
           </div>
         </div>
       </div>

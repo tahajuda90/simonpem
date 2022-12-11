@@ -23,7 +23,7 @@
                     foreach ($hitung as $htg) {
                         ?>
                         <tr>
-                            <td><?= $htg->nmr_ba ?></td>
+                            <td><?= $htg->no_ba ?></td>
                             <td><?= fdateformat('d-m-Y', $htg->tanggal) ?></td>
                             <td><?= $htg->prosentase ?> % 
                                 <br><?= rupiah($htg->hitung_nilai) ?> </td>

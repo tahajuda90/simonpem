@@ -15,7 +15,7 @@
 if(isset($button) && isset($identity)){
     $this->load->view('component/form/form_user');
 }else if(isset ($button)){
-    
+    $this->load->view('component/form/form_password');
 }else{
     $this->load->view('component/tabel/tabel_user');
 }

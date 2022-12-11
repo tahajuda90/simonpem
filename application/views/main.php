@@ -21,7 +21,7 @@
       rel="stylesheet"
     />    
     <script src="<?= base_url('assets/') ?>script/jquery-3.6.0.min.js"></script>
-    <title>Pembangunan</title>
+    <title>Sinergi - Sistem Informasi Pengendalian dan Evaluasi Melalui Registrasi Kontrak</title>
   </head>
   <body>
     <?php $this->load->view('component/navbar')?>
@@ -32,7 +32,7 @@
     </main>
     <footer class="footer">
       <div class="container">
-        <p class="text-center">footer</p>
+        <p class="text-center">&copy; Pemerintah Kota Kediri - Bagian Administrasi Pembangunan 2022</p>
       </div>
     </footer>
     <script src="<?= base_url('assets/') ?>vendor/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"></script>

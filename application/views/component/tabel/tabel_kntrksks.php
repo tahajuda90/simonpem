@@ -32,7 +32,7 @@
                   if($kt->jml_snksi == 0){
                       echo '<a class="btn-sm p-0 btn-success" href="'.base_url('C_Sanksi/sanksi_create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
                   }else{                      
-                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Sanksi/sanksi/'.$kt->id_kontrak).'">Adendum</a>';
+                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Sanksi/sanksi/'.$kt->id_kontrak).'">Sanksi</a>';
                   }
                   ?>
                   </td>
