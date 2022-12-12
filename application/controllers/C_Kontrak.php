@@ -104,7 +104,6 @@ class C_Kontrak extends MY_Controller {
                 $this->M_Ppk->insert_id($ppk, array('ppk_id' => $ppk->ppk_id));
                 $kntrk->id_paket = $this->M_Paket->insert_id($pkt, array('lls_id' => $pkt->lls_id));
                 $kntrk->id_rekanan = $this->M_Rekanan->insert_id($rekanan, array('rkn_npwp' => $rekanan->rkn_npwp));
-                $kntrk->kontrak_akhir = fdatetimetodb(date('Y-m-d', strtotime($kntrk->kontrak_mulai.' + '.$kntrk->lama_durasi_penyerahan1.' days')));
                 $this->session->set_flashdata('success', 'Data Berhasil Ditarik');
                 $this->edit($this->M_Kontrak->insert_id($kntrk, array('lls_id' => $kntrk->lls_id)));
             } else {

@@ -27,10 +27,21 @@ class M_Kontrak extends MY_Model{
         return parent::get_by_id($id);
     }
     
+    public function insert($data, $exist = null) {
+        if (array_key_exists('kontrak_tanggal|kontrak_mulai|lama_durasi_penyerahan1', $data)) {
+            $data['kontrak_tanggal'] = fdatetimetodb($data['kontrak_tanggal']);
+            $data['kontrak_mulai'] = fdatetimetodb($data['kontrak_mulai']);
+            $data['kontrak_akhir'] = fdatetimetodb(date('Y-m-d', strtotime($data['kontrak_mulai'] . ' + ' . $data['lama_durasi_penyerahan1'] . ' days')));
+        }
+        return parent::insert($data, $exist);
+    }
+    
     public function update($id, $data) {
-        $data['kontrak_tanggal'] = fdatetimetodb($data['kontrak_tanggal']);
-        $data['kontrak_mulai'] = fdatetimetodb($data['kontrak_mulai']);
-        $data['kontrak_akhir'] = fdatetimetodb($data['kontrak_akhir']);
+        if (array_key_exists('kontrak_tanggal|kontrak_mulai|lama_durasi_penyerahan1', $data)) {
+            $data['kontrak_tanggal'] = fdatetimetodb($data['kontrak_tanggal']);
+            $data['kontrak_mulai'] = fdatetimetodb($data['kontrak_mulai']);
+            $data['kontrak_akhir'] = fdatetimetodb(date('Y-m-d', strtotime($data['kontrak_mulai'] . ' + ' . $data['lama_durasi_penyerahan1'] . ' days')));
+        }
         return parent::update($id, $data);
     }
 }

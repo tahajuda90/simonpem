@@ -25,7 +25,10 @@
                         <tr>
                             <td><?= $add->nmr_adendum ?></td>
                             <td><?= fdateformat('d-m-Y', $add->tanggal_adendum) ?></td>
-                            <td>Nilai Kontrak : <?= rupiah($add->nilai_lama) ?> Menjadi <?= rupiah($add->kontrak_nilai) ?> </td>
+                            <td>Nilai Kontrak : <?= rupiah($add->nilai_lama) ?> Menjadi <?= rupiah($add->kontrak_nilai) ?><br> 
+                            Lama Pekerjaan : <?= $add->durasi_lama ?> hari Menjadi <?= $add->lama_durasi_penyerahan1 ?> hari<br>
+                            Lama Masa Pemeliharaan : <?= $add->pemeliharaan_lama ?> hari Menjadi <?= $add->lama_durasi_penyerahan1 ?> hari
+                            </td>
                             <td><?= $add->kendala ?></td>
                             <td><a class="badge badge-pill badge-primary" href="<?= base_url('assets/dokumen/'.$add->dokumen) ?>">Dokumen</a></td>
                             <td><a class="btn-sm p-0 btn-warning" href="<?= base_url('C_Adendum/adendum_update/'.$add->id_addm)?>"><i class="fa-solid fa-edit"></i>Edit</a></td>

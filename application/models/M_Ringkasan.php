@@ -18,5 +18,7 @@ class M_Ringkasan extends CI_Model{
         $this->db->group_by($this->M_Kontrak->table.'.id_kontrak');
         return $this->M_Kontrak->get_all();
     }
+    
+    
 }
     

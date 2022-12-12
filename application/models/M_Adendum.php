@@ -20,23 +20,25 @@ class M_Adendum extends MY_Model {
     }
     
     public function insert($data, $exist = null) {
+        $kontrak = $this->M_Kontrak->get_by_id($data['id_kontrak']);
         if ($data['kendala'] != null) {
             $data['id_mslh'] = $this->M_Masalah->insert_id(array('id_kontrak' => $data['id_kontrak'],'tanggal' => fdatetimetodb($data['tanggal_adendum']),'tahapan' => 'adendum','keterangan' => $data['kendala']));
         }        
         unset($data['kendala']);
         $data['tanggal_adendum'] = fdatetimetodb($data['tanggal_adendum']);
-        $this->M_Kontrak->update($data['id_kontrak'],array('lama_durasi_penyerahan1'=>$data['lama_durasi_penyerahan1'],'lama_durasi_pemeliharaan'=>$data['lama_durasi_pemeliharaan'],'kontrak_nilai'=>$data['kontrak_nilai'],'btk_pembayaran'=>$data['btk_pembayaran']));
+        $this->M_Kontrak->update($kontrak->id_kontrak,array('kontrak_mulai'=>$kontrak->kontrak_mulai,'lama_durasi_penyerahan1'=>$data['lama_durasi_penyerahan1'],'lama_durasi_pemeliharaan'=>$data['lama_durasi_pemeliharaan'],'kontrak_nilai'=>$data['kontrak_nilai'],'btk_pembayaran'=>$data['btk_pembayaran']));
         return parent::insert($data, $exist);
     }
     
     public function update($id, $data) {
-        if ($data['kendala'] != null) {
-            $add = $this->get_by_id($id);
+        $add = $this->get_by_id($id);
+        $kontrak = $this->M_Kontrak->get_by_id($add->id_kontrak);
+        if ($data['kendala'] != null) {            
             $this->M_Masalah->update($add->id_mslh,array('tanggal' => fdatetimetodb($data['tanggal_adendum']),'tahapan' => 'adendum','keterangan' => $data['kendala']));
         }
         unset($data['kendala']);
         $data['tanggal_adendum'] = fdatetimetodb($data['tanggal_adendum']);
-        $this->M_Kontrak->update($add->id_kontrak,array('lama_durasi_penyerahan1'=>$data['lama_durasi_penyerahan1'],'lama_durasi_pemeliharaan'=>$data['lama_durasi_pemeliharaan'],'kontrak_nilai'=>$data['kontrak_nilai'],'btk_pembayaran'=>$data['btk_pembayaran']));
+        $this->M_Kontrak->update($kontrak->id_kontrak,array('kontrak_mulai'=>$kontrak->kontrak_mulai,'lama_durasi_penyerahan1'=>$data['lama_durasi_penyerahan1'],'lama_durasi_pemeliharaan'=>$data['lama_durasi_pemeliharaan'],'kontrak_nilai'=>$data['kontrak_nilai'],'btk_pembayaran'=>$data['btk_pembayaran']));
         return parent::update($id, $data);
     }
     
