@@ -11,6 +11,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/dropzone/dist/min/dropzone.min.css" />        
 <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/bootstrap-datepicker/css/bootstrap-datepicker.css"/>
 <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/dataTables.bootstrap4.css" >    
+<link
+      rel="stylesheet"
+      href="<?= base_url('assets/') ?>vendor/datatables-bs4/css/buttons.bootstrap4.min.css"
+    />
 <link rel="stylesheet" href="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.css" />    
 <link rel="stylesheet" href="<?= base_url('assets/')?>fontawesome/css/all.css" />
     <link rel="stylesheet" href="<?= base_url('assets/') ?>styles/styles.css" />

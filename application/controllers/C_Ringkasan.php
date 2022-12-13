@@ -27,10 +27,27 @@ class C_Ringkasan extends MY_Controller{
     public function update($id_kontrak){
         $kontrak = $this->M_Kontrak->get_by_id($id_kontrak);
         $no_registrasi = $this->input->post('no_registrasi');
-        if($this->M_Kontrak->update($kontrak->id_kontrak,array('no_registrasi'=>$no_registrasi))){
+        if(empty($no_registrasi)){
+            $tgl =null;
+        } else {
+            $tgl =fdatetimetodb(date('d-m-Y'));
+        }
+        if($this->M_Kontrak->update($kontrak->id_kontrak,array('no_registrasi'=>$no_registrasi,'tgl_reg'=>$tgl ))){
             echo json_encode('success');          
         }else{
             echo json_encode('error');
         }
+    }
+    
+    public function progress(){
+        $data['kontrak'] = $this->M_Ringkasan->realisasi(array($this->M_Kontrak->table.'.kontrak_akhir >='=> fdatetimetodb(date('d-m-Y'))));
+        $data['page'] = 'page/ringRealisasi';
+        $this->load->view('main',$data);
+    }
+    
+    public function realisasi(){
+        $data['kontrak'] = $this->M_Ringkasan->realisasi(array($this->M_Kontrak->table.'.kontrak_akhir <='=> fdatetimetodb(date('d-m-Y'))));
+        $data['page'] = 'page/ringRealisasi';
+        $this->load->view('main',$data);
     }
 }

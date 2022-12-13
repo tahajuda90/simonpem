@@ -1,4 +1,4 @@
-<div class="container my-4">
+
     <div class="content shadow p-4">
         <div class="d-flex justify-content-end">    
             <button class="btn btn-primary mb-2">
@@ -39,7 +39,6 @@
             </tbody>
         </table>
     </div>
-</div>
 <script src="<?= base_url('assets/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="<?= base_url('assets/') ?>vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.js"></script>

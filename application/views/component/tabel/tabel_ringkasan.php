@@ -1,4 +1,4 @@
-<div class="container my-4">
+
       <div class="content shadow p-4">
         
         <table id="kontrakKerja" class="table table-bordered table-hover">
@@ -49,7 +49,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+
       <div
         class="modal fade"
         id="ringkasan"

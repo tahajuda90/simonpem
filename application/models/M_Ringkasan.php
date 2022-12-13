@@ -6,7 +6,7 @@ class M_Ringkasan extends CI_Model{
     
     public function __construct(){
         parent::__construct();
-        $this->load->model(array('M_Kontrak','M_Adendum','M_Sanksi','M_PerAkhir','M_Laporan'));
+        $this->load->model(array('M_Kontrak','M_Adendum','M_Sanksi','M_PerAkhir','M_Laporan','M_Rekanan'));
     }
     
     public function kontrak(){
@@ -19,6 +19,13 @@ class M_Ringkasan extends CI_Model{
         return $this->M_Kontrak->get_all();
     }
     
-    
+    public function realisasi($cond=null) {
+        $this->db->select($this->M_Rekanan->table.'.rkn_nama,'.$this->M_Rekanan->table.'.rkn_alamat');
+        $this->db->join($this->M_Rekanan->table,$this->M_Rekanan->table.'.id_rekanan = '.$this->M_Kontrak->table.'.id_rekanan','LEFT');
+        if($cond != null){
+            $this->db->where($cond);            
+        }
+        return $this->kontrak();
+    }
 }
     

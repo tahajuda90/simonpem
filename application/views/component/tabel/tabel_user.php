@@ -1,7 +1,7 @@
 <div class="content shadow p-4 my-4">
     <div class="d-flex justify-content-end">
         <button class="btn btn-primary mb-2">
-            <a href="" class="text-decoration-none text-white"
+            <a href="<?= base_url('Akses/create_user')?>" class="text-decoration-none text-white"
             >Tambah <span class="pl-2"><i class="fa-solid fa-plus"></i></span
           ></a>
         </button>

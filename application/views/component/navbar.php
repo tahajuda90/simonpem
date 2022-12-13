@@ -82,11 +82,11 @@
               </a>
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="<?= base_url('C_Ringkasan')?>">Ringkasan Kontrak</a>
-                <a class="dropdown-item" href="#"
+                <a class="dropdown-item" href="<?= base_url('C_Ringkasan/progress')?>"
                   >Ringkasan Progress Pekerjaan</a
                 >
-                <a class="dropdown-item" href="#"
-                  >Laporan Realisasi pekerjaan</a
+                <a class="dropdown-item" href="<?= base_url('C_Ringkasan/realisasi')?>"
+                  >Ringkasan Realisasi pekerjaan</a
                 >
               </div>
             </li>

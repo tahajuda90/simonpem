@@ -1,6 +1,4 @@
-<div class="container my-4">
-      <div class="content shadow p-4">
-        
+<div class="content shadow p-4 my-4">
         <div class="d-flex justify-content-end">
             <form method="get" action="<?= base_url('C_Kontrak/tarik')?>" class="form-inline">
             <div class="form-group mb-2 mr-2">
@@ -14,26 +12,36 @@
         <table id="kontrakKerja" class="table table-bordered table-hover">
           <thead>
             <tr>
-              <th>Kode</th>
-              <th>Satuan Kerja</th>
-              <th>Nama Paket</th>
-              <th>Nomor Kontrak</th>
-              <th>Nilai Kontrak</th>
-              <th>Tanggal Pengadaan</th>
-              <th>Action</th>
+              <th colspan="2" >Kode</th>
+              <th rowspan="2" >SKPD</th>
+              <th rowspan="2" >No & Tgl Registrasi</th>
+              <th rowspan="2" >Nama Paket Pengadaan</th>
+              <th rowspan="2" >Pagu Anggaran</th>
+              <th colspan="3">Kontrak</th>
+              <th rowspan="2" >Tanggal Pengadaan</th>
+              <th rowspan="2" >Action</th>
+            </tr>
+            <tr>
+                <th>RUP</th>
+                <th>Tender</th>
+                <th>No.</th>
+                <th>Tanggal</th>
+                <th>Nilai</th>
             </tr>
           </thead>
           <tbody>
               <?php if(!empty($kontrak)){
+                  $no = 1;
                   foreach($kontrak as $kt){ ?>
               <tr>
-                  <td>Kode Tender : <?=$kt->lls_id?>
-                      <br>
-                  Kode Sirup : <?=$kt->rup_id?>
-                  </td>
+                  <td><?=$kt->rup_id?></td>
+                  <td><?=$kt->lls_id?></td>
                   <td><?=$kt->stk_nama?></td>
+                  <td><?=$kt->no_registrasi?><br><?= isset($kt->tgl_reg)?fdateformat('d-m-Y', $kt->tgl_reg):''?></td>
                   <td><?=$kt->pkt_nama?></td>
+                  <td><?=$kt->pkt_pagu?></td>
                   <td><?=$kt->kontrak_no?></td>
+                  <td><?= fdateformat('d-m-Y', $kt->kontrak_tanggal)?></td>
                   <td><?= rupiah($kt->kontrak_nilai)?></td>
                   <td>Rencana : <?= fdateformat('m-Y',$kt->tanggal_awal_pengadaan)?>
                   <br>
@@ -41,18 +49,19 @@
                   </td>
                   <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('C_Kontrak/edit/'.$kt->id_kontrak)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
               </tr>
-              <?php    }
+              <?php $no++;    }
               }?>
           </tbody>
         </table>
       </div>
-    </div>
    <script src="<?= base_url('assets/') ?>vendor/datatables/jquery.dataTables.min.js"></script>
    <script src="<?= base_url('assets/') ?>vendor/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
    <script src="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.js"></script>
    <script type="text/javascript">
     $( document ).ready(function() {
-        $('#kontrakKerja').DataTable();
+        $('#kontrakKerja').DataTable({
+            scrollX: true
+        });
         $('#cari').on('click',function(e){
             Swal.fire({
             title: 'Tarik Data Tender !',
