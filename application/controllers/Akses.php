@@ -27,10 +27,10 @@ class Akses extends CI_Controller {
         if ($this->form_validation->run() === TRUE) {
             $remember = (bool) $this->input->post('remember');
             if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember)) {
-                redirect('C_Dashboard');
+                redirect('home');
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('Akses/login');
+                redirect('login');
             }
         } else {
             $this->load->view('login');
@@ -39,7 +39,7 @@ class Akses extends CI_Controller {
 
     public function logout() {
         $this->ion_auth->logout();
-        redirect('Akses/login', 'refresh');
+        redirect('login', 'refresh');
     }
     
     public function create_user() {
@@ -149,7 +149,7 @@ class Akses extends CI_Controller {
                 $this->logout();
             } else {
                 $this->session->set_flashdata('message', $this->ion_auth->errors());
-                redirect('', 'refresh');
+                redirect('user/passwd', 'refresh');
             }
         }
     }
@@ -166,7 +166,7 @@ class Akses extends CI_Controller {
         if ($activation) {
             // redirect them to the auth page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect('akses', 'refresh');
+            redirect('user', 'refresh');
         }
     }
 
@@ -179,7 +179,7 @@ class Akses extends CI_Controller {
         if ($this->ion_auth->logged_in() && $this->ion_auth->is_admin()) {
             $this->ion_auth->deactivate($id);
         }
-        redirect('akses', 'refresh');
+        redirect('user', 'refresh');
     }
 
 }

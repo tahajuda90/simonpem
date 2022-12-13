@@ -29,9 +29,9 @@ class C_SatuanKerja extends MY_Controller {
         }else{
             $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon'));
             if($this->M_Satker->insert($satker)){
-                $this->index();
+                redirect('skpd');
             }else{
-                $this->create();
+                redirect('skpd/create');
             }
         }
     }
@@ -52,9 +52,9 @@ class C_SatuanKerja extends MY_Controller {
         }else{            
             $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon'));
             if($this->M_Satker->update($data['satker']->id_satker,$satker)){
-                $this->index();
+                redirect('skpd');
             }else{
-                $this->edit($data['satker']->id_satker);
+                redirect('skpd/edit/'.$data['satker']->id_satker);
             }
         }
     }

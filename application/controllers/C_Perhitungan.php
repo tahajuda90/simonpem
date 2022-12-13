@@ -34,7 +34,7 @@ class C_Perhitungan extends MY_Controller {
         $this->form_validation->set_rules('no_ba', 'Nomor Berita Acara', 'trim|required');
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Perhitungan/hitung_create/'.$data['kontrak']->id_kontrak));
+            redirect(base_url('hitung/create/'.$data['kontrak']->id_kontrak));
         }else{
             $hitung = $this->input->post(array('no_ba','tanggal','prosentase','hitung_nilai','kendala'));
             $hitung['id_kontrak'] = $data['kontrak']->id_kontrak;
@@ -49,9 +49,9 @@ class C_Perhitungan extends MY_Controller {
                 $done = false;
             }
             if($done){
-                redirect(base_url('C_Perhitungan/hitung/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('hitung/list/'.$data['kontrak']->id_kontrak));
             }else{
-                redirect(base_url('C_Perhitungan/hitung_create/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('hitung/create/'.$data['kontrak']->id_kontrak));
             }
         }
     }
@@ -68,7 +68,7 @@ class C_Perhitungan extends MY_Controller {
         $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
         $this->form_validation->set_rules('no_ba', 'Nomor Berita Acara', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Perhitungan/hitung_update/'.$data['hitung']->id_prakhir));
+            redirect(base_url('hitung/edit/'.$data['hitung']->id_prakhir));
         }else{
             $hitung = $this->input->post(array('no_ba','tanggal','prosentase','hitung_nilai','kendala'));
             $this->upload();
@@ -77,9 +77,9 @@ class C_Perhitungan extends MY_Controller {
                 $hitung['dokumen'] = $this->upload->data('file_name');
             }
             if($this->M_PerAkhir->update($data['hitung']->id_prakhir,$hitung)){
-                redirect(base_url('C_Perhitungan/hitung/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('hitung/list/'.$data['kontrak']->id_kontrak));
             }else{
-                redirect(base_url('C_Perhitungan/hitung_create/'.$data['hitung']->id_prakhir));
+                redirect(base_url('hitung/edit/'.$data['hitung']->id_prakhir));
             }
         }
     }

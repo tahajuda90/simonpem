@@ -134,52 +134,5 @@ function filterArrayByKeyValue($array, $key, $keyValue) {
 
 
 function load_menu($group=null){
-            $menu = [];
-            
-            $menu['dashboard']['menu']='Dashboard';
-            $menu['dashboard']['ikon'] = '<i class="fa fa-dashboard"></i>';
-            $menu['dashboard']['link'] = 'home';
-            if($group == 'admin'){
-            $menu['user']['menu']='Manajemen User';
-            $menu['user']['ikon'] = '<i class="app-menu__icon fa fa-user-o"></i>';
-            $menu['user']['link'] = 'user';
-            }
-            if(($group == 'admin') OR ($group == 'operator')){
-            $menu['penilaian']['menu']='Indikator Penilaian';
-            $menu['penilaian']['ikon'] = '<i class="app-menu__icon fa fa-tasks"></i>';
-            $menu['penilaian']['sub']['group'] = 'Aspek Penilaian';
-            $menu['penilaian']['sub']['kualifikasi'] = 'Kualifikasi Pekerjaan';
-            
-            $menu['master']['menu']='Master';
-            $menu['master']['ikon'] = '<i class="app-menu__icon fa fa-bars"></i>';
-            $menu['master']['sub']['satker']='Satuan Kerja';
-            $menu['master']['sub']['ppk']='P. Pembuat Komitmen';
-            $menu['master']['sub']['bntkusaha']='Bentuk Usaha';
-            $menu['master']['sub']['metode']='Metode Pemilihan';
-            $menu['master']['sub']['paket']='Paket Pekerjaan';
-            
-            $menu['lpse']['menu']='Data Live LPSE';
-            $menu['lpse']['ikon'] = '<i class="app-menu__icon fa fa-bank"></i>';
-            $menu['lpse']['sub']['tdr']='Paket Tender';
-            $menu['lpse']['sub']['nontdr']='Paket Non-Tender';
-            
-            $menu['perusahaan']['menu']='Perusahaan';
-            $menu['perusahaan']['ikon'] = '<i class="app-menu__icon fa fa-building-o"></i>';
-            $menu['perusahaan']['link'] = 'rekanan';
-            
-            $menu['skor']['menu']='Penilaian';
-            $menu['skor']['ikon'] = '<i class="app-menu__icon fa fa-bar-chart"></i>';
-            $menu['skor']['link']='penilaian';}
-            else{
-            $menu['paket']['menu']='Paket Pekerjaan';
-            $menu['paket']['ikon'] = '<i class="app-menu__icon fa fa-briefcase"></i>';
-            $menu['paket']['link']='paket';
-            
-            $menu['skor']['menu']='Penilaian';
-            $menu['skor']['ikon'] = '<i class="app-menu__icon fa fa-bar-chart"></i>';
-            $menu['skor']['link']='penilaian';
-                
-            }
-            
-            return $menu;
-        }
+
+}

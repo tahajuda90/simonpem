@@ -22,6 +22,7 @@ class C_Realisasi extends MY_Controller {
         $data['button'] = 'Simpan';
         $data['page'] = 'page/uraian';
         $this->load->view('main',$data);
+//        print_r($this->uri->segment($this->uri->total_segments()));
     }
     
     public function uraian_store($id_kontrak){
@@ -33,9 +34,9 @@ class C_Realisasi extends MY_Controller {
             $uraian = $this->input->post(array('uraian_pkrj', 'satuan', 'volume'));
             $uraian['id_kontrak'] = $data['kontrak']->id_kontrak;
             if($this->M_Pekerjaan->insert($uraian)){
-                redirect(base_url('C_Realisasi/uraian/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('realisasi/uraian/'.$data['kontrak']->id_kontrak));
             }else{
-                $this->uraian($data['kontrak']->id_kontrak);
+                redirect(base_url('realisasi/uraian/'.$data['kontrak']->id_kontrak));
             }
         }
     }
@@ -57,9 +58,9 @@ class C_Realisasi extends MY_Controller {
          }else{
              $uraian = $this->input->post(array('uraian_pkrj', 'satuan', 'volume'));
              if($this->M_Pekerjaan->update($data['uraian']->id_pkrj,$uraian)){
-                 redirect(base_url('C_Realisasi/uraian/'.$data['kontrak']->id_kontrak));
+                 redirect(base_url('realisasi/uraian/'.$data['kontrak']->id_kontrak));
              }else{
-                 $this->uraian_edit($data['uraian']->id_pkrj);
+                 redirect(base_url('realisasi/uraian/edit/'.$data['kontrak']->id_kontrak));
              }
          }
     }

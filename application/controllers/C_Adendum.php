@@ -13,6 +13,7 @@ class C_Adendum extends MY_Controller {
         $data['kontrak'] = $this->M_Adendum ->kontrak();
         $data['page'] = 'page/adendum';
         $this->load->view('main',$data);
+//        print_r(count($this->uri->segment_array()));
     }
     
     public function adendum($id_kontrak){
@@ -35,7 +36,7 @@ class C_Adendum extends MY_Controller {
         $this->form_validation->set_rules('nmr_adendum', 'Nomor Adendum', 'trim|required');
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Adendum/adendum_create/'.$data['kontrak']->id_kontrak));
+            redirect(base_url('adendum/create/'.$data['kontrak']->id_kontrak));
         }else{
             $post = $this->input->post(array('nmr_adendum','tanggal_adendum','lama_durasi_penyerahan1','lama_durasi_pemeliharaan','kontrak_nilai','btk_pembayaran','kendala'));
             $lama = array('id_kontrak'=>$data['kontrak']->id_kontrak,'durasi_lama'=>$data['kontrak']->lama_durasi_penyerahan1,'pemeliharaan_lama'=>$data['kontrak']->lama_durasi_pemeliharaan,'nilai_lama'=>$data['kontrak']->kontrak_nilai,'pbyr_lama'=>$data['kontrak']->btk_pembayaran);
@@ -51,9 +52,9 @@ class C_Adendum extends MY_Controller {
                 $done = false;
             }
             if($done){
-                redirect(base_url('C_Adendum/adendum/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('adendum/list/'.$data['kontrak']->id_kontrak));
             }else{
-                redirect(base_url('C_Adendum/adendum_create/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('adendum/create/'.$data['kontrak']->id_kontrak));
             }
         }
     }
@@ -70,7 +71,7 @@ class C_Adendum extends MY_Controller {
         $data['adendum'] = $this->M_Adendum->get_by_id($id_addm);
         $this->form_validation->set_rules('nmr_adendum', 'Nomor Adendum', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Adendum/adendum_update/'.$data['adendum']->id_addm));
+            redirect(base_url('adendum/edit/'.$data['adendum']->id_addm));
         }else{
             $adendum = $this->input->post(array('nmr_adendum','tanggal_adendum','lama_durasi_penyerahan1','lama_durasi_pemeliharaan','kontrak_nilai','btk_pembayaran','kendala'));
             $this->upload();
@@ -79,9 +80,9 @@ class C_Adendum extends MY_Controller {
                 $adendum['dokumen'] = $this->upload->data('file_name');
             }
             if($this->M_Adendum->update($data['adendum']->id_addm,$adendum)){
-                redirect(base_url('C_Adendum/adendum/'.$data['adendum']->id_kontrak));
+                redirect(base_url('adendum/list/'.$data['adendum']->id_kontrak));
             }else{
-                redirect(base_url('C_Adendum/adendum_edit/'.$data['adendum']->id_addm));
+                redirect(base_url('adendum/edit/'.$data['adendum']->id_addm));
             }
         }
     }

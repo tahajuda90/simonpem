@@ -29,9 +29,9 @@ class C_Rekanan extends MY_Controller{
         } else {
             $rekanan = $this->input->post(array('rkn_nama','rkn_alamat','rkn_npwp','lhk_no','lhk_tanggal','lhk_notaris'));
             if($this->M_Rekanan->insert($rekanan)){
-                $this->index();
+                redirect('penyedia');
             }else{
-                $this->create();
+                redirect('penyedia/create');
             }
         }
     }
@@ -53,9 +53,9 @@ class C_Rekanan extends MY_Controller{
         } else {
             $rekanan = $this->input->post(array('rkn_nama','rkn_alamat','rkn_npwp','lhk_no','lhk_tanggal','lhk_notaris'));
             if($this->M_Rekanan->update($data['rekanan']->id_rekanan,$rekanan)){
-                $this->index();
+                redirect('penyedia');
             }else{
-                $this->store_edit($data['rekanan']->id_rekanan);
+                redirect('penyedia/edit/'.$data['rekanan']->id_rekanan);
             }
         }
     }

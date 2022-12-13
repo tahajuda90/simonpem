@@ -307,7 +307,7 @@ $(document).ready(function () {
                             if(myDropzone.files.length > 0 ){
                                 myDropzone.processQueue();
                             }else{
-                                window.location.href = "<?= base_url('C_Laporan/laporan_edit/')?>"+hasil.id_lpr;
+                                window.location.href = "<?= base_url('realisasi/laporan/edit/')?>"+hasil.id_lpr;
                             }                            
                         }else{
                             console.log("error");
@@ -321,21 +321,21 @@ $(document).ready(function () {
             });
             this.on("success", function (file, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/laporan/')?>"+hasil.id_kontrak;
             });
             this.on("error", function (file, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
             });
             this.on("queuecomplete", function () {});
             this.on("sendingmultiple", function() {});
             this.on("successmultiple", function(files, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
             });
             this.on("errormultiple", function(files, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('C_Laporan/laporan/')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
             });
         }
     });

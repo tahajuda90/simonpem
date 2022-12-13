@@ -4,10 +4,17 @@
     </div>
     <div class="col-md-4">
         <nav aria-label="breadcrumb ">
-            <ol class="breadcrumb shadow p-3 mb-5 rounded">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
+             <ol class="breadcrumb shadow p-3 mb-5 rounded">
+                <li class="breadcrumb-item"><a href="<?= base_url('home')?>">Home</a></li>
+                <?php
+                if(count($this->uri->segment_array())>1){
+                    echo '<li class="breadcrumb-item"><a href="'.base_url('kontrak').'">Kontrak</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>';
+                }else{
+                    echo '<li class="breadcrumb-item active" aria-current="page">Kontrak</li>';
+                }
+                ?>
+                
             </ol>
         </nav>
     </div>

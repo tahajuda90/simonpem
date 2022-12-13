@@ -42,9 +42,9 @@ class C_Kontrak extends MY_Controller {
             $kontrak['id_paket'] = $this->M_Paket->insert_id($paket, array('lls_id' => $paket['lls_id']));
             $kontrak['id_rekanan'] = $this->M_Rekanan->insert_id($rekanan, array('rkn_npwp' => $rekanan['rkn_npwp']));
             if($this->M_Kontrak->insert($kontrak,array('kontrak_no'=>$kontrak['kontrak_no']))) {
-                $this->index();
+                redirect('kontrak');
             } else {
-                $this->create();
+                redirect('kontrak/create');
             }
         }
     }
@@ -72,9 +72,9 @@ class C_Kontrak extends MY_Controller {
             $kontrak = $this->input->post(array('kontrak_no', 'kontrak_tanggal', 'kontrak_nilai', 'kontrak_mulai', 'kode_akun_kegiatan', 'kontrak_jabatan_wakil', 'kontrak_wakil_penyedia', 'lama_durasi_penyerahan1', 'lama_durasi_pemeliharaan'));
             $msuk = $this->M_Paket->update($data['kontrak']->id_paket,$paket) && $this->M_Rekanan->update($data['kontrak']->id_rekanan,$rekanan);
             if($msuk && $this->M_Kontrak->update($data['kontrak']->id_kontrak,$kontrak)){
-                $this->index();
+                redirect('kontrak');
             }else{
-                $this->edit($data['kontrak']->id_kontrak);
+                redirect('kontrak/edit/'.$data['kontrak']->id_kontrak);
             }
         }
     }

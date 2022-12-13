@@ -35,7 +35,7 @@ class C_Sanksi extends MY_Controller {
         $this->form_validation->set_rules('nmr_denda', 'Nomor Denda', 'trim|required');
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Sanksi/sanksi_create/'.$data['kontrak']->id_kontrak));
+            redirect(base_url('sanksi/create/'.$data['kontrak']->id_kontrak));
         }else{
             $sanksi = $this->input->post(array('nmr_denda','tanggal','jns_sanksi','sanksi','denda_nilai','kendala'));
             $sanksi['id_kontrak'] = $data['kontrak']->id_kontrak;
@@ -50,9 +50,9 @@ class C_Sanksi extends MY_Controller {
                 $done = false;
             }
             if($done){
-                redirect(base_url('C_Sanksi/sanksi/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('sanksi/list/'.$data['kontrak']->id_kontrak));
             }else{
-                redirect(base_url('C_Sanksi/sanksi_create/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('sanksi/list/'.$data['kontrak']->id_kontrak));
             }
         }
     }
@@ -69,7 +69,7 @@ class C_Sanksi extends MY_Controller {
         $data['sanksi'] = $this->M_Sanksi->get_by_id($id_snksi);
         $this->form_validation->set_rules('nmr_denda', 'Nomor Denda', 'trim|required');
         if ($this->form_validation->run() == FALSE) {
-            redirect(base_url('C_Sanksi/sanksi_update/'.$data['sanksi']->id_snksi));
+            redirect(base_url('sanksi/edit/'.$data['sanksi']->id_snksi));
         }else{
             $sanksi = $this->input->post(array('nmr_denda','tanggal','jns_sanksi','sanksi','denda_nilai','kendala'));
             $this->upload();
@@ -78,9 +78,9 @@ class C_Sanksi extends MY_Controller {
                 $sanksi['dokumen'] = $this->upload->data('file_name');
             }
             if($this->M_Sanksi->update($data['sanksi']->id_snksi,$sanksi)){
-                redirect(base_url('C_Sanksi/sanksi/'.$data['sanksi']->id_kontrak));
+                redirect(base_url('sanksi/list'.$data['sanksi']->id_kontrak));
             }else{
-                redirect(base_url('C_Sanksi/sanksi_update/'.$data['sanksi']->id_snksi));
+                redirect(base_url('sanksi/edit/'.$data['sanksi']->id_snksi));
             }
         }
     }
