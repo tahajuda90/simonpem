@@ -29,9 +29,9 @@
                   <td>                      
                   <?php
                   if($kt->jml_prakhir == 0){
-                      echo '<a class="btn-sm p-0 btn-success" href="'.base_url('C_Perhitungan/hitung_create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
+                      echo '<a class="btn-sm p-0 btn-success" href="'.base_url('perhitungan/create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
                   }else{                      
-                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Perhitungan/hitung/'.$kt->id_kontrak).'">Perhitungan</a>';
+                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('perhitungan/list/'.$kt->id_kontrak).'">Perhitungan</a>';
                   }
                   ?>
                   </td>

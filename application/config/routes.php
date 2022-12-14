@@ -50,3 +50,7 @@ $route['perhitungan/create/(:any)'] = 'C_Perhitungan/hitung_create/$1';
 $route['perhitungan/edit/(:any)'] = 'C_Perhitungan/hitung_update/$1';
 $route['perhitungan/list/(:any)'] = 'C_Perhitungan/hitung/$1';
 
+$route['ringkasan'] = 'C_Ringkasan';
+$route['ringkasan/progress'] = 'C_Ringkasan/progress';
+$route['ringkasan/realisasi'] = 'C_Ringkasan/realisasi';
+

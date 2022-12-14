@@ -5,9 +5,9 @@
     <div class="col-md-4">
         <nav aria-label="breadcrumb ">
             <ol class="breadcrumb shadow p-3 mb-5 rounded">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Library</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Data</li>
+                <li class="breadcrumb-item"><a href="<?= base_url('home')?>">Home</a></li>
+                <li class="breadcrumb-item"><a href="<?= base_url('ringkasan')?>">Ringkasan</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><?= ucfirst($this->uri->segment(2))?></li>
             </ol>
         </nav>
     </div>

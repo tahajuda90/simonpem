@@ -1,7 +1,7 @@
     <div class="content shadow p-4">
         <div class="d-flex justify-content-end">    
             <button class="btn btn-primary mb-2">
-                <a href="<?= base_url('C_Perhitungan/hitung_create/' . $kontrak->id_kontrak) ?>" class="text-decoration-none text-white"
+                <a href="<?= base_url('perhitungan/create/' . $kontrak->id_kontrak) ?>" class="text-decoration-none text-white"
                    >Tambah <span class="pl-2"><i class="fa-solid fa-plus"></i></span
                     ></a>
             </button>
@@ -28,7 +28,7 @@
                                 <br><?= rupiah($htg->hitung_nilai) ?> </td>
                             <td><?= $htg->kendala ?></td>
                             <td><a class="badge badge-pill badge-primary" href="<?= base_url('assets/dokumen/'.$htg->dokumen) ?>">Dokumen</a></td>
-                            <td><a class="btn-sm p-0 btn-warning" href="<?= base_url('C_Perhitungan/hitung_update/'.$htg->id_prakhir)?>"><i class="fa-solid fa-edit"></i>Edit</a></td>
+                            <td><a class="btn-sm p-0 btn-warning" href="<?= base_url('perhitungan/edit/'.$htg->id_prakhir)?>"><i class="fa-solid fa-edit"></i>Edit</a></td>
                         </tr>      
                     <?php }
                 }

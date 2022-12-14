@@ -1,7 +1,7 @@
  <div class="content shadow p-4 my-4">
      <div class="d-flex justify-content-end">
         <button class="btn btn-primary mb-2">
-            <a href="<?= base_url('C_Laporan/laporan_create/'.$kontrak->id_kontrak)?>" class="text-decoration-none text-white"
+            <a href="<?= base_url('realisasi/laporan/create/'.$kontrak->id_kontrak)?>" class="text-decoration-none text-white"
             >Tambah <span class="pl-2"><i class="fa-solid fa-plus"></i></span
           ></a>
         </button>
@@ -115,7 +115,7 @@
                 <div class="d-flex justify-content-end my-4">
                   <a
                     class="btn btn-primary"
-                    href="<?= base_url('C_Laporan/laporan_rinci/'.$lpr->id_lpr)?>"
+                    href="<?= base_url('realisasi/laporan/detail/'.$lpr->id_lpr)?>"
                     role="button"
                     >Detail</a
                   >

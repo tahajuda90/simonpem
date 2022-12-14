@@ -30,7 +30,7 @@
                             <?php echo htmlspecialchars($group->name, ENT_QUOTES, 'UTF-8'); ?><br/>
     <?php endforeach ?></td>
                     <td><?php echo ($user->active) ? anchor("Akses/deactivate/" . $user->id, lang('index_active_link')) : anchor("Akses/activate/" . $user->id, lang('index_inactive_link')); ?></td>
-                    <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('Akses/edit_user/'.$user->id)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
+                    <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('user/update/'.$user->id)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
                 </tr>
                 <?php
                 $no++;

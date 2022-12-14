@@ -19,7 +19,7 @@
                             <td><?=$pkj->uraian_pkrj?></td>
                             <td><?=$pkj->satuan?></td>
                             <td><?=$pkj->volume?></td>
-                            <td><a class="btn-xs p-2 btn-warning" href="<?= base_url('C_Realisasi/uraian_edit/'.$pkj->id_pkrj)?>"><i class="fa-solid fa-edit"></i>Edit</a></td>
+                            <td><a class="btn-xs p-2 btn-warning" href="<?= base_url('realisasi/uraian/edit/'.$pkj->id_pkrj)?>"><i class="fa-solid fa-edit"></i>Edit</a></td>
                         </tr>
                     <?php
                 }}else{

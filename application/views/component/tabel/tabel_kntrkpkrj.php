@@ -47,7 +47,7 @@
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('C_Kontrak/edit/'.$kt->id_kontrak)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
+                  <td><a class="btn-sm p-1 btn-warning" href="<?= base_url('kontrak/edit/'.$kt->id_kontrak)?>"><i class="fa-solid fa-edit"></i>edit</a></td>
               </tr>
               <?php $no++;    }
               }?>

@@ -134,5 +134,66 @@ function filterArrayByKeyValue($array, $key, $keyValue) {
 
 
 function load_menu($group=null){
-
+    $menu = [];
+    $menu['dashboard']['menu'] = 'Dashboard';
+    $menu['dashboard']['link'] = 'home';
+    switch ($group):
+        case 'admin':
+            $menu['user']['menu'] = 'User Manajemen';
+            $menu['user']['link'] = 'user';            
+            $menu['master']['menu'] = 'Master';
+            $menu['master']['sub']['kontrak'] = 'Kontrak';
+            $menu['master']['sub']['skpd'] = 'Satuan Kerja';
+            $menu['master']['sub']['penyedia'] = 'Penyedia';
+            $menu['laporan']['menu'] = 'Laporan';
+            $menu['laporan']['sub']['realisasi'] = 'Realisasi Pekerjaan';
+            $menu['laporan']['sub']['adendum'] = 'Adendum Pekerjaan';
+            $menu['laporan']['sub']['sanksi'] = 'Sanksi / Denda Pekerjaan';
+            $menu['laporan']['sub']['perhitungan'] = 'Berita Acara Perhitungan';
+            $menu['monitoring']['menu'] = 'Monitoring';
+            $menu['monitoring']['sub']['ringkasan'] = 'Ringkasan Kontrak';
+            $menu['monitoring']['sub']['ringkasan/progress'] = 'Ringkasan Progress Pekerjaan';
+            $menu['monitoring']['sub']['ringkasan/realisasi'] = 'Ringkasan Realisasi Pekerjaan';
+            break;
+        case 'operator':
+            $menu['master']['menu'] = 'Master';
+            $menu['master']['sub']['kontrak'] = 'Kontrak';
+            $menu['master']['sub']['skpd'] = 'Satuan Kerja';
+            $menu['master']['sub']['penyedia'] = 'Penyedia';
+            $menu['laporan']['menu']='Laporan';
+            $menu['laporan']['sub']['realisasi'] = 'Realisasi Pekerjaan';
+            $menu['laporan']['sub']['adendum'] = 'Adendum Pekerjaan';
+            $menu['laporan']['sub']['sanksi'] = 'Sanksi / Denda Pekerjaan';
+            $menu['laporan']['sub']['perhitungan'] = 'Berita Acara Perhitungan';
+            $menu['monitoring']['menu'] = 'Monitoring';
+            $menu['monitoring']['sub']['ringkasan'] = 'Ringkasan Kontrak';
+            $menu['monitoring']['sub']['ringkasan/progress'] = 'Ringkasan Progress Pekerjaan';
+            $menu['monitoring']['sub']['ringkasan/realisasi'] = 'Ringkasan Realisasi Pekerjaan';
+            break;
+        case 'skpd':
+            $menu['kontrak']['menu'] = 'Kontrak';
+            $menu['kontrak']['link'] = 'kontrak'; 
+            $menu['laporan']['menu'] = 'Laporan';
+            $menu['laporan']['sub']['realisasi'] = 'Realisasi Pekerjaan';
+            $menu['laporan']['sub']['adendum'] = 'Adendum Pekerjaan';
+            $menu['laporan']['sub']['sanksi'] = 'Sanksi / Denda Pekerjaan';
+            $menu['laporan']['sub']['perhitungan'] = 'Berita Acara Perhitungan';
+            $menu['monitoring']['menu'] = 'Monitoring';
+            $menu['monitoring']['sub']['ringkasan'] = 'Ringkasan Kontrak';
+            $menu['monitoring']['sub']['ringkasan/progress'] = 'Ringkasan Progress Pekerjaan';
+            $menu['monitoring']['sub']['ringkasan/realisasi'] = 'Ringkasan Realisasi Pekerjaan';
+            break;
+        case 'auditor':
+            $menu['laporan']['menu'] = 'Laporan';
+            $menu['laporan']['sub']['realisasi'] = 'Realisasi Pekerjaan';
+            $menu['laporan']['sub']['adendum'] = 'Adendum Pekerjaan';
+            $menu['laporan']['sub']['sanksi'] = 'Sanksi / Denda Pekerjaan';
+            $menu['laporan']['sub']['perhitungan'] = 'Berita Acara Perhitungan';
+            $menu['monitoring']['menu'] = 'Monitoring';
+            $menu['monitoring']['sub']['ringkasan'] = 'Ringkasan Kontrak';
+            $menu['monitoring']['sub']['ringkasan/progress'] = 'Ringkasan Progress Pekerjaan';
+            $menu['monitoring']['sub']['ringkasan/realisasi'] = 'Ringkasan Realisasi Pekerjaan';
+            break;
+    endswitch;
+    return $menu;
 }

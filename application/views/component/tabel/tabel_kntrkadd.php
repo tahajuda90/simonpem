@@ -29,9 +29,9 @@
                   <td>                      
                   <?php
                   if($kt->jml_addm == 0){
-                      echo '<a class="btn-sm p-0 btn-success" href="'.base_url('C_Adendum/adendum_create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
+                      echo '<a class="btn-sm p-0 btn-success" href="'.base_url('adendum/create/'.$kt->id_kontrak).'"><i class="fa-solid fa-add"></i>Tambah</a>';
                   }else{                      
-                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('C_Adendum/adendum/'.$kt->id_kontrak).'">Adendum</a>';
+                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('adendum/list/'.$kt->id_kontrak).'">Adendum</a>';
                   }
                   ?>
                   </td>
