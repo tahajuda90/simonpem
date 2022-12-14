@@ -6,16 +6,22 @@ class M_Kontrak extends MY_Model{
     
     var $table = 'kontrak';
     var $primary = 'id_kontrak';
+    var $group = '';
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Satker','M_Paket','M_Rekanan'));
+        $this->load->model(array('M_Satker','M_Paket','M_Rekanan','M_KontrakUser'));
+        $this->group = $this->ion_auth->get_users_groups()->row()->name;
     }
     
     public function get_all() {
         $this->db->select($this->table.'.*,'.$this->M_Satker->table.'.stk_nama,'.$this->M_Paket->table.'.*');
         $this->db->join($this->M_Paket->table,$this->M_Paket->table.'.id_paket = '.$this->table.'.id_paket','LEFT');
         $this->db->join($this->M_Satker->table,$this->M_Satker->table.'.id_satker = '.$this->M_Paket->table.'.id_satker','LEFT');
+        if($this->group == 'skpd'){
+            $this->db->join($this->M_KontrakUser->table, $this->table.'.id_kontrak = '.$this->M_KontrakUser->table.'.id_kontrak','LEFT');
+            $this->db->where(array($this->M_KontrakUser->table.'.id_user'=>$this->ion_auth->get_user_id()));
+        }
         return parent::get_all();
     }
     

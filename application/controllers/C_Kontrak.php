@@ -5,7 +5,7 @@ class C_Kontrak extends MY_Controller {
     
     public function __construct(){
         parent::__construct();
-        $this->load->model(array('M_Satker','M_Rekanan','M_Ppk','M_Paket','M_Kontrak'));
+        $this->load->model(array('M_Satker','M_Rekanan','M_Ppk','M_Paket','M_Kontrak','M_KontrakUser'));
         $this->load->helper(array('ds_helper'));
     }
     
@@ -85,16 +85,38 @@ class C_Kontrak extends MY_Controller {
     
     public function tarik() {
         $lls_id = $this->input->get('lls_id');
+        $result = $this->server($lls_id);
+        if($this->ion_auth->get_users_groups()->row()->name == 'admin' || $this->ion_auth->get_users_groups()->row()->name == 'operator'){            
+            if ($result->result) {
+                $this->session->set_flashdata('success', 'Data Berhasil Ditarik');
+                $this->edit($result->data);
+            } else {
+                $this->session->set_flashdata('error_tarik',$result->data);
+                redirect('kontrak');
+            }
+        }else{
+            if ($result->result) {
+                $data = array('id_user'=>$this->ion_auth->get_user_id(),'id_kontrak'=> $result->data);
+                $this->M_KontrakUser->insert($data, array('id_kontrak' => $result->data));
+                $this->session->set_flashdata('success', 'Data Berhasil Ditarik');
+                $this->edit($result->data);
+            } else {
+                $this->session->set_flashdata('error_tarik',$result->data);
+                redirect('kontrak');
+            }
+        }
+    }
+    
+    function server($lls_id){
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, "http://projek.efm/simantaha/index.php/Pemb_api/api/" . $lls_id);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl);
         if (curl_error($curl)) {
-            echo curl_error($curl);
+            return (object)array('result'=>false,'data'=>curl_error($curl));
         } else {
-            $result = json_decode($response);
-            //print_r(json_decode($response)->data->satker);
-            if ($result->result) {
+             $result = json_decode($response);
+             if ($result->result) {
                 $satker = $result->data->satker;
                 $rekanan = $result->data->rekanan;
                 $ppk = $result->data->ppk;
@@ -104,12 +126,10 @@ class C_Kontrak extends MY_Controller {
                 $this->M_Ppk->insert_id($ppk, array('ppk_id' => $ppk->ppk_id));
                 $kntrk->id_paket = $this->M_Paket->insert_id($pkt, array('lls_id' => $pkt->lls_id));
                 $kntrk->id_rekanan = $this->M_Rekanan->insert_id($rekanan, array('rkn_npwp' => $rekanan->rkn_npwp));
-                $this->session->set_flashdata('success', 'Data Berhasil Ditarik');
-                $this->edit($this->M_Kontrak->insert_id($kntrk, array('lls_id' => $kntrk->lls_id)));
-            } else {
-                $this->session->set_flashdata('error_tarik',$result->data);
-                redirect('C_Kontrak');
-            }
+                return (object)array('result'=>true,'data'=>$this->M_Kontrak->insert_id($kntrk, array('lls_id' => $kntrk->lls_id)));
+             }else{
+                 return (object)array('result'=>false,'data'=>$result->data);
+             }
         }
     }
 

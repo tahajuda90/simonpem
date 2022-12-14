@@ -69,6 +69,19 @@ body {
 .wrapper a:hover {
   color: red;
 }
+
+.page-print {
+  width: 210mm;
+  min-height: 297mm;
+  padding: 20mm;
+  margin: 10mm auto;
+  font-size: 16px;
+}
+
+.atas-nama {
+  margin-top: 75px;
+}
+
 .footer {
   background: #333;
   color: white;

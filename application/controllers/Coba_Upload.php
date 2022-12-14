@@ -5,14 +5,17 @@ class Coba_Upload extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Laporan'));
+//        $this->load->model(array('M_Laporan'));
     }
     
     public function index(){
+        $this->load->library('pdfgenerator');
 //        $data['page'] = 'page/cobaUpload';
 //        $data['laporan'] = (object) array('rencana'=> set_value('rencana'),'realisasi'=> set_value('realisasi'),'keterangan'=> set_value('keterangan'),'bulan'=> set_value('bulan'),'minggu'=> set_value('minggu'),'tanggal_awal'=> set_value('tanggal_awal'),'tanggal_akhir'=> set_value('tanggal_akhir'));
 //        $data['action'] = base_url('Coba_Upload/store');
-//        $this->load->view('main',$data);        
+//        $this->load->view('component/template');
+        // filename dari pdf ketika didownload
+        $this->pdfgenerator->generate('component/template');
     }
     
     public function store() {
