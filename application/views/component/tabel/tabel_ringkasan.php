@@ -33,11 +33,14 @@
                   <td><?=$kt->jml_addm?></td>
                   <td><?=$kt->jml_snksi?></td>
                   <td><?=$kt->jml_prakhir?></td>
-                  <td>
-                      <button data-toggle="modal"
-          data-target="#ringkasan" value="<?=$kt->id_kontrak?>" id="regis" class="btn-sm p-0 btn-success" >Registrasi</button>
-                  <br><br>
+                  <td>                     
                   <?php
+                  if(($this->group == 'admin')|| ($this->group == 'operator')){
+                      echo' <button data-toggle="modal"
+          data-target="#ringkasan" value="'.$kt->id_kontrak.'" id="regis" class="btn-sm p-0 btn-success" >Registrasi</button>
+                  <br><br>';
+                  }
+                  
                   if(!empty($kt->no_registrasi)){
                       echo '<a type="button" class="btn-sm p-0 btn-primary" href="'.base_url('C_Ringkasan/cetak/'.$kt->id_kontrak).'"><i class="fa-solid fa-print"></i>Cetak</a>';
                   }

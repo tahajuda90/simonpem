@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_Ringkasan extends MY_Controller{
-    
+
     public function __construct() {
         parent::__construct();
         $this->load->model(array('M_Ringkasan','M_Kontrak','M_Adendum','M_Sanksi','M_PerAkhir','M_Ppk'));

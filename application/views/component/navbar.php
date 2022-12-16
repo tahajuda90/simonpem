@@ -21,8 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <?php
-                $name = $this->ion_auth->get_users_groups()->row()->name;
-                foreach (load_menu($name) as $menu) {
+                foreach (load_menu($this->group) as $menu) {
                     if (isset($menu['sub'])) {
                         echo '<li class="nav-item '.(in_array($this->uri->segment(1), array_keys($menu['sub'])) ? 'active':'').' dropdown"><a
                         class="nav-link dropdown-toggle"

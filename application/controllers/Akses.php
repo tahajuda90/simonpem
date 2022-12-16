@@ -3,7 +3,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Akses extends CI_Controller {
-
+    var $group = '';
     public function __construct() {
         parent::__construct();
         $this->load->library(['ion_auth', 'form_validation']);
@@ -13,6 +13,7 @@ class Akses extends CI_Controller {
     }
 
     public function index() {
+        $this->group = $this->ion_auth->get_users_groups()->row()->name;
         $data['users'] = $this->ion_auth->users()->result();
         foreach ($data['users'] as $k => $user) {
             $data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
@@ -43,6 +44,7 @@ class Akses extends CI_Controller {
     }
     
     public function create_user() {
+        $this->group = $this->ion_auth->get_users_groups()->row()->name;
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             redirect('C_User/logout', 'refresh');
         }
@@ -82,6 +84,7 @@ class Akses extends CI_Controller {
     }
     
     public function edit_user($id) {
+        $this->group = $this->ion_auth->get_users_groups()->row()->name;
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
             redirect('C_User/logout', 'refresh');
         }
@@ -126,6 +129,7 @@ class Akses extends CI_Controller {
     }
     
         public function change_password(){
+        $this->group = $this->ion_auth->get_users_groups()->row()->name;
         $this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
         $this->form_validation->set_rules('new', $this->lang->line('change_password_validation_new_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|matches[new_confirm]');
 	$this->form_validation->set_rules('new_confirm', $this->lang->line('change_password_validation_new_password_confirm_label'), 'required');
