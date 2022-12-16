@@ -11,7 +11,7 @@ class Pdfgenerator {
     public function __construct() {
         $this->ci = & get_instance();
     }
-    public function generate($view, $data = array(), $filename = 'Laporan', $paper = 'A4', $orientation = 'portrait') {
+    public function generate($view, $data = array(), $filename = 'Laporan', $paper = 'legal', $orientation = 'portrait') {
         $dompdf = new Dompdf();
         $html = $this->ci->load->view($view, $data, TRUE);
         $dompdf->loadHtml($html);

@@ -39,7 +39,7 @@
                   <br><br>
                   <?php
                   if(!empty($kt->no_registrasi)){
-                      echo '<a type="button" class="btn-sm p-0 btn-primary" href=""><i class="fa-solid fa-print"></i>Cetak</a>';
+                      echo '<a type="button" class="btn-sm p-0 btn-primary" href="'.base_url('C_Ringkasan/cetak/'.$kt->id_kontrak).'"><i class="fa-solid fa-print"></i>Cetak</a>';
                   }
                   ?>
                   </td>

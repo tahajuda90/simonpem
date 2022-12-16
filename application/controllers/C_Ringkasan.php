@@ -5,7 +5,8 @@ class C_Ringkasan extends MY_Controller{
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Ringkasan'));
+        $this->load->model(array('M_Ringkasan','M_Kontrak','M_Adendum','M_Sanksi','M_PerAkhir','M_Ppk'));
+        $this->load->helper('ds_helper');
     }
     
     public function index (){
@@ -49,5 +50,16 @@ class C_Ringkasan extends MY_Controller{
         $data['kontrak'] = $this->M_Ringkasan->realisasi(array($this->M_Kontrak->table.'.kontrak_akhir <='=> fdatetimetodb(date('d-m-Y'))));
         $data['page'] = 'page/ringRealisasi';
         $this->load->view('main',$data);
+    }
+    
+    public function cetak($id_kontrak){
+        $this->load->library('pdfgenerator');
+        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
+        $data['adendum'] = $this->M_Adendum->get_cond(array($this->M_Adendum->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['sanksi1'] = $this->M_Sanksi->get_cond(array($this->M_Sanksi->table.'.id_kontrak'=>$data['kontrak']->id_kontrak,$this->M_Sanksi->table.'.jns_sanksi'=>1));
+        $data['sanksi2'] = $this->M_Sanksi->get_cond(array($this->M_Sanksi->table.'.id_kontrak'=>$data['kontrak']->id_kontrak,$this->M_Sanksi->table.'.jns_sanksi'=>2));
+        $data['hitung'] = $this->M_PerAkhir->get_cond(array($this->M_PerAkhir->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['ppk'] = $this->M_Ppk->get_cond(array('ppk_id'=>$data['kontrak']->ppk_id))[0];
+        $this->pdfgenerator->generate('component/template',$data);
     }
 }
