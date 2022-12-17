@@ -55,7 +55,7 @@
               <td style="width: 5%">4.</td>
               <td style="width: 50%">Nilai Kontrak</td>
               <td style="width: 5%; text-align: center">:</td>
-              <td style="width: 45%"><?=$kontrak->kontrak_nilai?></td>
+              <td style="width: 45%"><?=rupiah($kontrak->kontrak_nilai)?></td>
             </tr>
             <tr>
               <td style="width: 5%">5.</td>
@@ -67,7 +67,7 @@
               <td style="width: 5%">6.</td>
               <td style="width: 50%">Jangka Waktu Pelaksanaan</td>
               <td style="width: 5%; text-align: center">:</td>
-              <td style="width: 45%"><?=$kontrak->lama_durasi_penyerahan1?></td>
+              <td style="width: 45%"><?=$kontrak->lama_durasi_penyerahan1?> Hari Kalender</td>
             </tr>
             <tr>
               <td style="width: 5%"></td>
@@ -83,7 +83,7 @@
             </tr>
             <tr>
               <td style="width: 5%">7.</td>
-              <td style="width: 50%">Cara Pembayaran</td>
+              <td style="width: 50%">Bentuk Pembayaran</td>
               <td style="width: 5%; text-align: center">:</td>
               <td style="width: 45%"><?= isset($kontrak->btk_pembayaran)?pembayaran()[$kontrak->btk_pembayaran]:'............'?></td>
             </tr>

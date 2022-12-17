@@ -36,9 +36,9 @@
             <td><?= rupiah($kt->kontrak_nilai)?></td>
             <td><?=$kt->lama_durasi_penyerahan1?><br><?= fdatebulan(date("m",strtotime($kt->kontrak_mulai)))?>-<?= fdatebulan(date("m",strtotime($kt->kontrak_akhir)))?></td>
             <td><?= fdateformat('d-m-Y', $kt->kontrak_mulai)?></td>
-            <td><?=$kt->rencana?></td>
-            <td><?=$kt->realisasi?></td>
-            <td><?=$kt->realisasi - $kt->rencana?></td>
+            <td><?=$kt->rencana?>%</td>
+            <td><?=$kt->realisasi?>%</td>
+            <td><?=$kt->realisasi - $kt->rencana?>%</td>
           </tr>
                     
             <?php    }
