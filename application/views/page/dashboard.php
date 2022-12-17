@@ -11,96 +11,67 @@
           </div>
         </div>
 
+
+        <?php if($this->group != 'skpd'){ ?>
         <div class="content shadow p-4 my-4">
-          <div class="form-row">
-            <div class="col-md-4 mb-3">
-              <select class="custom-select">
-                <option selected disabled value="">Silahkan Pilih</option>
-                <option>...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="col-md-4 mb-3">
-              <select class="custom-select">
-                <option selected disabled value="">Silahkan Pilih</option>
-                <option>...</option>
-                <option>...</option>
-              </select>
-            </div>
-            <div class="col-auto mb-3 align-self-end ml-auto">
-              <button class="btn btn-primary" name="submit" type="submit">
-                Generate
-              </button>
-            </div>
-          </div>
+            <form>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <select name="id_satker" class="custom-select">
+                                <option selected disabled value="">Satuan Kerja</option>
+                                <?php
+                                if (!empty($satker)) {
+                                    foreach ($satker as $stk) {
+                                        echo '<option value="' . $stk->id_satker . '">' . $stk->stk_nama . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select name="mode" class="custom-select">
+                                <option selected disabled value="">Silahkan Pilih</option>
+                                <option value="1" >Selesai</option>
+                                <option value="2" >Progress</option>
+                                <option value="3" >Realisasi = 100%</option>
+                                <option value="4" >Realisasi < 100%</option>
+                            </select>
+                        </div>
+                        <div class="col-auto mb-3 align-self-end ml-auto">
+                            <button class="btn btn-primary" name="submit" type="submit">
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </form>
         </div>
+        <?php } ?>
 
         <div class="content shadow p-4 my-4">
           <canvas id="myChart"></canvas>
-          <div class="accordion shadow mt-5" id="dashboardAccordion">
-            <div class="card">
-              <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                  <div
-                    class="btn btn-block text-center font-weight-bold"
-                    data-toggle="collapse"
-                    data-target="#collapseOne"
-                    aria-expanded="false"
-                    aria-controls="collapseOne"
-                  >
-                    Rincian Data
-                  </div>
-                </h2>
-              </div>
-
-              <div
-                id="collapseOne"
-                class="collapse"
-                aria-labelledby="headingOne"
-                data-parent="#dashboardAccordion"
-              >
-                <div class="card-body">
-                  <table
-                    id="rincianData"
-                    class="table table-bordered table-hover"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Rendering engine</th>
-                        <th>Browser</th>
-                        <th>Platform(s)</th>
-                        <th>Engine version</th>
-                        <th>CSS grade</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td>4</td>
-                        <td>X</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td>5</td>
-                        <td>C</td>
-                      </tr>
-                      <tr>
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.5</td>
-                        <td>Win 95+</td>
-                        <td>5.5</td>
-                        <td>A</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 <script src="<?= base_url('assets/')?>vendor/chartjs/dist/chart.umd.js"></script>
-<script src="<?= base_url('assets/')?>script/chartjs.js"></script>
+<!--<script src="<?= base_url('assets/')?>script/chartjs.js"></script>-->
+<script type="text/javascript">
+    $(document).ready(function () { 
+    
+    const ctx = document.getElementById("myChart");
+    const data = <?=$grafik?>;
+    console.log(data.legend);
+new Chart(ctx, {
+  type: "bar",
+  data: {
+      labels:data.label,
+      datasets:[{
+            label: data.legend[0],
+            data: data.data[0]
+            },{
+            label: data.legend[1],
+            data: data.data[1]
+            }]
+  },
+  options: {
+    responsive: true  }
+});
+    });
+</script>
