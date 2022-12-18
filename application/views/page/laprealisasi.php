@@ -7,7 +7,7 @@
             <ol class="breadcrumb shadow p-3 mb-5 rounded">
                 <li class="breadcrumb-item"><a href="<?= base_url('home')?>">Home</a></li>
                 <li class="breadcrumb-item"><a href="<?= base_url('realisasi')?>">Realisasi</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Laporan</li>
+                <li class="breadcrumb-item active" aria-current="page">Data</li>
             </ol>
         </nav>
     </div>

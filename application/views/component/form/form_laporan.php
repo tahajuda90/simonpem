@@ -78,19 +78,6 @@
                             Field tidak boleh kosong.
                         </div>
                     </div>
-                    <div class="col mb-3">
-                        <label>Bulan</label>
-                        <input
-                            type="text"
-                            name="bulan"
-                            class="form-control"
-                            required
-                            value="<?=$laporan->bulan?>"
-                            />
-                        <div class="invalid-feedback">
-                            Field tidak boleh kosong.
-                        </div>
-                    </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6 mb-3">
@@ -257,21 +244,21 @@ $(document).ready(function () {
             });
             this.on("success", function (file, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('realisasi/laporan/')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/list/')?>"+hasil.id_kontrak;
             });
             this.on("error", function (file, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/list/')?>"+hasil.id_kontrak;
             });
             this.on("queuecomplete", function () {});
             this.on("sendingmultiple", function() {});
             this.on("successmultiple", function(files, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/list/')?>"+hasil.id_kontrak;
             });
             this.on("errormultiple", function(files, response) {
                 hasil = JSON.parse(response);
-                window.location.href = "<?= base_url('realisasi/laporan')?>"+hasil.id_kontrak;
+                window.location.href = "<?= base_url('realisasi/list/')?>"+hasil.id_kontrak;
             });
         }
     });

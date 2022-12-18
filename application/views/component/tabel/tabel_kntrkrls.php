@@ -26,11 +26,12 @@
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a type="button" class="btn-sm p-1 btn-success" href="<?= base_url('realisasi/create/'.$kt->id_kontrak)?>"><span><i class="fa-solid fa-plus"></i>Realisasi</span></a>
-                  <br><br>
+                  <td>
                   <?php
-                  if($kt->jml_pkrj !=0){
-                      echo '<a class="btn-sm p-0 btn-primary" href="'.base_url('realisasi/laporan/'.$kt->id_kontrak).'"><i class="fa-solid fa-note-sticky"></i>Laporan</a>';
+                  if($kt->jml_lpr !=0){
+                      echo '<a type="button" class="btn-sm p-1 btn-primary" href="'.base_url('realisasi/list/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-note-sticky"></i>Laporan</span></a>';
+                  }else{
+                      echo '<a type="button" class="btn-sm p-1 btn-success" href="'. base_url('realisasi/create/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-plus"></i>Realisasi</span></a>';
                   }
                   ?>
                   </td>

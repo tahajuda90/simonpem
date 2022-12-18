@@ -40,6 +40,11 @@ body {
   background: #ffff;
 }
 
+.thumbnail {
+    width: 160px;
+    height: 80px;
+}
+
 .dropzone {
   border: 2px dashed #dedede;
   border-radius: 5px;

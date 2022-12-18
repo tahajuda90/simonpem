@@ -6,7 +6,7 @@ class C_Realisasi extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Kontrak','M_Laporan','M_Bukti'));
+        $this->load->model(array('M_Kontrak', 'M_Laporan', 'M_Bukti'));
     }
 
     public function index() {
@@ -15,23 +15,26 @@ class C_Realisasi extends MY_Controller {
         $this->load->view('main', $data);
     }
 
-    public function realisasi($id_kontrak){
+    public function realisasi($id_kontrak) {
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        $data['laporan'] = $this->M_Laporan->get_cond(array($this->M_Laporan->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['laporan'] = $this->M_Laporan->get_cond(array($this->M_Laporan->table . '.id_kontrak' => $data['kontrak']->id_kontrak));
+        foreach ($data['laporan'] as $key => $lpr) {
+            $data['laporan'][$key]->bukti = $this->M_Bukti->get_cond(array('id_lpr' => $lpr->id_lpr));
+        }
         $data['page'] = 'page/laprealisasi';
         $this->load->view('main', $data);
     }
-    
+
     public function realisasi_create($id_kontrak) {
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        $data['laporan'] = (object) array('rencana' => set_value('rencana'), 'realisasi' => set_value('realisasi'), 'keterangan' => set_value('keterangan'), 'kendala' => set_value('kendala'), 'bulan' => set_value('bulan'), 'minggu' => set_value('minggu'), 'tanggal_awal' => set_value('tanggal_awal'), 'tanggal_akhir' => set_value('tanggal_akhir'));
+        $data['laporan'] = (object) array('rencana' => set_value('rencana'), 'realisasi' => set_value('realisasi'), 'keterangan' => set_value('keterangan'), 'kendala' => set_value('kendala'), 'minggu' => set_value('minggu'), 'tanggal_awal' => set_value('tanggal_awal'), 'tanggal_akhir' => set_value('tanggal_akhir'));
         $data['action'] = base_url('C_Realisasi/store/' . $data['kontrak']->id_kontrak);
         $data['button'] = 'Simpan';
         $data['page'] = 'page/laprealisasi';
         $this->load->view('main', $data);
     }
-    
-        public function store($id_kontrak){
+
+    public function store($id_kontrak) {
         $this->form_validation->set_rules('rencana', 'Rencana', 'trim|required');
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
         if ($this->form_validation->run() == FALSE) {
@@ -39,8 +42,8 @@ class C_Realisasi extends MY_Controller {
         } else {
             $laporan = $this->input->post(array('rencana', 'realisasi', 'keterangan', 'bulan', 'minggu', 'tanggal_awal', 'tanggal_akhir', 'kendala'));
             $laporan['id_kontrak'] = $data['kontrak']->id_kontrak;
-            $id_lpr = $this->M_Laporan->insert_id($laporan);            
-            if(isset($id_lpr)) {
+            $id_lpr = $this->M_Laporan->insert_id($laporan);
+            if (isset($id_lpr)) {
                 echo json_encode(array('status' => "success", 'id_lpr' => $id_lpr));
             } else {
                 echo json_encode(array('status' => "error", 'msg' => 'tidak masuk'));
@@ -48,54 +51,29 @@ class C_Realisasi extends MY_Controller {
         }
     }
 
-    public function uraian($id_kontrak) {
-        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        $data['uraian'] = (object) array('uraian_pkrj' => set_value('uraian_pkrj'), 'satuan' => set_value('satuan'), 'volume' => set_value('volume'));
-        $data['pekerjaan'] = $this->M_Pekerjaan->get_cond(array('id_kontrak' => $data['kontrak']->id_kontrak));
-        $data['action'] = base_url('C_Realisasi/uraian_store/' . $data['kontrak']->id_kontrak);
-        $data['button'] = 'Simpan';
-        $data['page'] = 'page/uraian';
-        $this->load->view('main', $data);
-//        print_r($this->uri->segment($this->uri->total_segments()));
-    }
-
-    public function uraian_store($id_kontrak) {
-        $this->form_validation->set_rules('uraian_pkrj', 'Uraian Pekerjaan', 'trim|required');
-        $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        if ($this->form_validation->run() == FALSE) {
-            $this->uraian($data['kontrak']->id_kontrak);
-        } else {
-            $uraian = $this->input->post(array('uraian_pkrj', 'satuan', 'volume'));
-            $uraian['id_kontrak'] = $data['kontrak']->id_kontrak;
-            if ($this->M_Pekerjaan->insert($uraian)) {
-                redirect(base_url('realisasi/uraian/' . $data['kontrak']->id_kontrak));
-            } else {
-                redirect(base_url('realisasi/uraian/' . $data['kontrak']->id_kontrak));
-            }
-        }
-    }
-
-    public function uraian_edit($id_pkrj) {
-        $data['uraian'] = $this->M_Pekerjaan->get_by_id($id_pkrj);
-        $data['kontrak'] = $this->M_Kontrak->get_by_id($data['uraian']->id_kontrak);
-        $data['action'] = base_url('C_Realisasi/uraian_store_edit/' . $data['kontrak']->id_kontrak);
+    public function realisasi_edit($id_lpr) {
+//        $bukti = $this->M_Bukti->get_cond(array('id_lpr'=>$data['laporan']->id_lpr));
+        $data['laporan'] = $this->M_Laporan->get_by_id($id_lpr);
+        $data['bukti'] = empty($this->M_Bukti->get_cond(array('id_lpr' => $data['laporan']->id_lpr))) ? array() : $this->M_Bukti->get_cond(array('id_lpr' => $data['laporan']->id_lpr));
+        $data['action'] = base_url('C_Realisasi/store_edit/' . $data['laporan']->id_lpr);
         $data['button'] = 'Ubah';
-        $data['page'] = 'page/uraian';
+        $data['page'] = 'page/laprealisasi';
         $this->load->view('main', $data);
     }
 
-    public function uraian_store_edit($id_pkrj) {
-        $data['uraian'] = $this->M_Pekerjaan->get_by_id($id_pkrj);
-        $this->form_validation->set_rules('uraian_pkrj', 'Uraian Pekerjaan', 'trim|required');
+    public function store_edit($id_lpr) {
+        $this->form_validation->set_rules('rencana', 'Rencana', 'trim|required');
+        $data['laporan'] = $this->M_Laporan->get_by_id($id_lpr);
+        $pkrj = $this->input->post($this->M_LapPeker->id_only(array('id_lpr' => $data['laporan']->id_lpr)));
         if ($this->form_validation->run() == FALSE) {
-            $this->uraian_edit($data['uraian']->id_pkrj);
+            echo json_encode(array('status' => "error", 'msg' => validation_errors()));
         } else {
-            $uraian = $this->input->post(array('uraian_pkrj', 'satuan', 'volume'));
-            if ($this->M_Pekerjaan->update($data['uraian']->id_pkrj, $uraian)) {
-                redirect(base_url('realisasi/uraian/' . $data['kontrak']->id_kontrak));
-            } else {
-                redirect(base_url('realisasi/uraian/edit/' . $data['kontrak']->id_kontrak));
+            $laporan = $this->input->post(array('rencana', 'realisasi', 'keterangan', 'bulan', 'minggu', 'tanggal_awal', 'tanggal_akhir', 'kendala'));
+            $this->M_Laporan->update($data['laporan']->id_lpr, $laporan);
+            foreach ($pkrj as $key => $val) {
+                $this->M_LapPeker->update($key, array('bobot' => $val));
             }
+            echo json_encode(array('status' => "success", 'id_lpr' => $data['laporan']->id_lpr));
         }
     }
 
@@ -124,6 +102,15 @@ class C_Realisasi extends MY_Controller {
             echo json_encode(array('status' => 'error', 'msg' => $error, 'id_kontrak' => $lap->id_kontrak));
 //            redirect('C_Laporan/laporan_edit/'.$lap->id_lpr);
         }
+    }
+
+    public function delete_bukti($id_bkti) {
+        $bukti = $this->M_Bukti->get_by_id($id_bkti);
+        $id_lpr = $bukti->id_lpr;
+        if (unlink(FCPATH . '/assets/gambar/' . $bukti->image)) {
+            $this->M_Bukti->delete($bukti->id_bkti);
+        }
+        redirect('C_Laporan/laporan_edit/' . $id_lpr);
     }
 
 }
