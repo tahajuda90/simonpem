@@ -26,7 +26,7 @@
                   <br>
                   Realisasi : <?= fdateformat('m-Y',$kt->jadwal_awal_pengumuman)?>
                   </td>
-                  <td><a class="btn-sm p-0 btn-success" href="<?= base_url('realisasi/uraian/'.$kt->id_kontrak)?>"><i class="fa-solid fa-plus"></i>Uraian</a>
+                  <td><a type="button" class="btn-sm p-1 btn-success" href="<?= base_url('realisasi/create/'.$kt->id_kontrak)?>"><span><i class="fa-solid fa-plus"></i>Realisasi</span></a>
                   <br><br>
                   <?php
                   if($kt->jml_pkrj !=0){

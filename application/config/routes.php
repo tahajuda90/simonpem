@@ -28,10 +28,10 @@ $route['penyedia/create'] = 'C_Rekanan/create';
 $route['penyedia/edit/(:any)'] = 'C_Rekanan/edit/$1';
 
 $route['realisasi'] = 'C_Realisasi/index';
+$route['realisasi/create/(:any)'] = 'C_Realisasi/realisasi_create/$1';
 $route['realisasi/uraian/(:any)'] = 'C_Realisasi/uraian/$1';
 $route['realisasi/uraian/edit/(:any)'] = 'C_Realisasi/uraian_edit/$1';
-$route['realisasi/laporan/(:any)'] = 'C_Laporan/laporan/$1';
-$route['realisasi/laporan/create/(:any)'] = 'C_Laporan/laporan_create/$1';
+$route['realisasi/list/(:any)'] = 'C_Realisasi/realisasi/$1';
 $route['realisasi/laporan/edit/(:any)'] = 'C_Laporan/laporan_edit/$1';
 $route['realisasi/laporan/detail/(:any)'] = 'C_Laporan/laporan_rinci/$1';
 

@@ -40,6 +40,5 @@
       </div>
     </footer>
     <script src="<?= base_url('assets/') ?>vendor/bootstrap-4.6.2-dist/js/bootstrap.bundle.min.js"></script>
-    <script src="<?= base_url('assets/') ?>script/main.js"></script>
   </body>
 </html>

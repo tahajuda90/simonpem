@@ -46,7 +46,7 @@ class Akses extends CI_Controller {
     public function create_user() {
         $this->group = $this->ion_auth->get_users_groups()->row()->name;
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('C_User/logout', 'refresh');
+            redirect('Akses/logout', 'refresh');
         }
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
@@ -86,7 +86,7 @@ class Akses extends CI_Controller {
     public function edit_user($id) {
         $this->group = $this->ion_auth->get_users_groups()->row()->name;
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin()) {
-            redirect('C_User/logout', 'refresh');
+            redirect('Akses/logout', 'refresh');
         }
         $user = $this->ion_auth->user($id)->row();
         $this->form_validation->set_rules('id','id required','required');

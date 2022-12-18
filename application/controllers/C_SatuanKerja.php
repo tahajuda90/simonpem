@@ -15,7 +15,7 @@ class C_SatuanKerja extends MY_Controller {
     }
     
     public function create(){
-        $data['satker'] = (object) array('stk_nama'=> set_value('stk_nama'),'stk_alamat'=> set_value('stk_alamat'),'stk_telepon'=> set_value('stk_telepon'));
+        $data['satker'] = (object) array('stk_nama'=> set_value('stk_nama'),'stk_alamat'=> set_value('stk_alamat'),'stk_telepon'=> set_value('stk_telepon'),'nama_kpl'=> set_value('nama_kpl'),'nip_kpl'=>set_value('nip_kpl'));
         $data['page'] = 'page/satuankerja';
         $data['action'] = base_url('C_SatuanKerja/store');
         $data['button'] = 'Simpan';
@@ -27,7 +27,7 @@ class C_SatuanKerja extends MY_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         }else{
-            $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon'));
+            $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon','nama_kpl','nip_kpl'));
             if($this->M_Satker->insert($satker)){
                 redirect('skpd');
             }else{
@@ -50,7 +50,7 @@ class C_SatuanKerja extends MY_Controller {
         if ($this->form_validation->run() == FALSE) {
             $this->edit($data['satker']->id_satker);
         }else{            
-            $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon'));
+            $satker = $this->input->post(array('stk_nama','stk_alamat','stk_telepon','nama_kpl','nip_kpl'));
             if($this->M_Satker->update($data['satker']->id_satker,$satker)){
                 redirect('skpd');
             }else{

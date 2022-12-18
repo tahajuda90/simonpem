@@ -18,20 +18,6 @@
             <li class="nav-item" role="presentation">
                 <button
                     class="nav-link"
-                    id="pills-uraian-tab"
-                    data-toggle="pill"
-                    data-target="#pills-uraian"
-                    type="button"
-                    role="tab"
-                    aria-controls="pills-uraian"
-                    aria-selected="false"
-                    >
-                    Uraian Pekerjaan
-                </button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button
-                    class="nav-link"
                     id="pills-upload-tab"
                     data-toggle="pill"
                     data-target="#pills-upload"
@@ -176,56 +162,6 @@
                     <div class="invalid-feedback">Field tidak boleh kosong.</div>
                 </div>
             </div>
-
-            <!-- tab form uraian pekerjaan -->
-            <div
-                class="tab-pane fade"
-                id="pills-uraian"
-                role="tabpanel"
-                aria-labelledby="pills-uraian-tab"
-                >
-                <table class="table table-bordered">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="col-5">Uraian Pekerjaan</th>
-                            <th class="col-5">Satuan</th>
-                            <th class="col-2">Bobot Pekerjaan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if(!empty($pekerjaan) && isset($pekerjaan)){
-                            foreach($pekerjaan as $pkj){ ?>
-                        <tr>
-                            <td><?=$pkj->uraian_pkrj?></td>
-                            <td><?=$pkj->satuan?></td>
-                            <td>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="<?=$pkj->id_pkrj?>"
-                                    />
-                            </td>
-                        </tr>
-                        <?php    }} else if(!empty($lapPeker) && isset($lapPeker)){
-                            foreach($lapPeker as $pkj){ ?>
-                                <tr>
-                            <td><?=$pkj->uraian_pkrj?></td>
-                            <td><?=$pkj->satuan?></td>
-                            <td>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    name="<?=$pkj->id_lpkr?>"
-                                    value="<?=$pkj->bobot?>"
-                                    />
-                            </td>
-                        </tr>
-                        <?php    }
-                        }?>
-                        
-                    </tbody>
-                </table>
-            </div>
             <input type="hidden" id="id_lpr" name="id_lpr">
             <!-- tab form upload -->
             <div
@@ -283,7 +219,7 @@
 Dropzone.autoDiscover = false;
 $(document).ready(function () {
     var myDropzone =  new Dropzone(("div#uploadBukti"),{
-        url:'<?= base_url('C_Laporan/upload')?>',
+        url:'<?= base_url('C_Realisasi/upload')?>',
         paramName: 'image',
         autoProcessQueue: false,
         uploadMultiple: false,
