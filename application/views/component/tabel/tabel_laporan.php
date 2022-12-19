@@ -22,7 +22,7 @@
                 <tr>
                     <td class="font-weight-bold">Nilai kontrak :</td>
 
-                    <td><?= $kontrak->kontrak_nilai ?></td>
+                    <td><?= rupiah($kontrak->kontrak_nilai) ?></td>
                 </tr>
             </table>
         </div>

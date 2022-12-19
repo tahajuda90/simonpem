@@ -21,7 +21,7 @@ class C_Realisasi extends MY_Controller {
         foreach ($data['laporan'] as $key => $lpr) {
             $data['laporan'][$key]->bukti = $this->M_Bukti->get_cond(array('id_lpr' => $lpr->id_lpr));
         }
-        $data['page'] = 'page/laprealisasi';
+        $data['page'] = 'page/realisasi';
         $this->load->view('main', $data);
     }
 
@@ -30,7 +30,7 @@ class C_Realisasi extends MY_Controller {
         $data['laporan'] = (object) array('rencana' => set_value('rencana'), 'realisasi' => set_value('realisasi'), 'keterangan' => set_value('keterangan'), 'kendala' => set_value('kendala'), 'minggu' => set_value('minggu'), 'tanggal_awal' => set_value('tanggal_awal'), 'tanggal_akhir' => set_value('tanggal_akhir'));
         $data['action'] = base_url('C_Realisasi/store/' . $data['kontrak']->id_kontrak);
         $data['button'] = 'Simpan';
-        $data['page'] = 'page/laprealisasi';
+        $data['page'] = 'page/realisasi';
         $this->load->view('main', $data);
     }
 
@@ -57,7 +57,7 @@ class C_Realisasi extends MY_Controller {
         $data['bukti'] = empty($this->M_Bukti->get_cond(array('id_lpr' => $data['laporan']->id_lpr))) ? array() : $this->M_Bukti->get_cond(array('id_lpr' => $data['laporan']->id_lpr));
         $data['action'] = base_url('C_Realisasi/store_edit/' . $data['laporan']->id_lpr);
         $data['button'] = 'Ubah';
-        $data['page'] = 'page/laprealisasi';
+        $data['page'] = 'page/realisasi';
         $this->load->view('main', $data);
     }
 

@@ -9,7 +9,7 @@ class M_Adendum extends MY_Model {
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Kontrak','M_Masalah','M_Paket'));
+        $this->load->model(array('M_Kontrak','M_Masalah'));
     }
     
     public function kontrak(){

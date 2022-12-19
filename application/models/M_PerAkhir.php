@@ -9,7 +9,7 @@ class M_PerAkhir extends MY_Model{
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Kontrak','M_Masalah','M_Paket'));
+        $this->load->model(array('M_Kontrak','M_Masalah'));
     }
     
     public function kontrak(){
@@ -21,7 +21,7 @@ class M_PerAkhir extends MY_Model{
     
     public function insert($data, $exist = null) {
         if ($data['kendala'] != null) {
-            $data['id_mslh'] = $this->M_Masalah->insert_id(array('id_kontrak' => $data['id_kontrak'],'tanggal' => fdatetimetodb($data['tanggal_adendum']),'tahapan' => 'perhitungan','keterangan' => $data['kendala']));
+            $data['id_mslh'] = $this->M_Masalah->insert_id(array('id_kontrak' => $data['id_kontrak'],'tanggal' => fdatetimetodb($data['tanggal']),'tahapan' => 'perhitungan','keterangan' => $data['kendala']));
         }
         unset($data['kendala']);
         $data['tanggal'] = fdatetimetodb($data['tanggal']);
@@ -31,10 +31,10 @@ class M_PerAkhir extends MY_Model{
     public function update($id, $data) {
         if ($data['kendala'] != null) {
             $prakhir = $this->get_by_id($id);
-            $this->M_Masalah->update($prakhir->id_mslh,array('tanggal' => fdatetimetodb($data['tanggal_adendum']),'tahapan' => 'perhitungan','keterangan' => $data['kendala']));
+            $this->M_Masalah->update($prakhir->id_mslh,array('tanggal' => fdatetimetodb($data['tanggal']),'tahapan' => 'perhitungan','keterangan' => $data['kendala']));
         }
         unset($data['kendala']);
-         $data['tanggal'] = fdatetimetodb($data['tanggal']);
+        $data['tanggal'] = fdatetimetodb($data['tanggal']);
         return parent::update($id, $data);
     }
     

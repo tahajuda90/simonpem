@@ -102,6 +102,7 @@
                   <?php if($button !== 'Update'){echo'required';}?>
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
+                <p class="text-muted my-3">*Ubah komponen yang perlu diubah</p>
               </div>
               <div class="col-auto mb-3 align-self-end ml-auto">
                 <button class="btn btn-primary" name="submit" type="submit">

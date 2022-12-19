@@ -247,8 +247,7 @@
                         name="alamat_lokasi"
                         rows="5"
                         required
-                        value="<?=$paket->alamat_lokasi?>"
-                        ></textarea>
+                        ><?=$paket->alamat_lokasi?></textarea>
                     <div class="invalid-feedback">Field tidak boleh kosong.</div>
                 </div>
             </div>

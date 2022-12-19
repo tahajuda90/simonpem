@@ -13,8 +13,8 @@
               <th style="width: 10%" rowspan="2">Action</th>
             </tr>
             <tr>
-                <th>Adendum</th>
-                <th>Denda</th>
+                <th>Pembayaran</th>
+                <th>Adendum</th>
                 <th>BA.Perhitungan</th>
             </tr>
           </thead>
@@ -30,19 +30,19 @@
                   <td><?=$kt->pkt_nama?><br>No Kontrak :<?=$kt->kontrak_no?></td>
                   <td><?= rupiah($kt->kontrak_nilai)?></td>
                   <td><?=$kt->realisasi?>%</td>
+                  <td><?=$kt->jml_pemb?></td>
                   <td><?=$kt->jml_addm?></td>
-                  <td><?=$kt->jml_snksi?></td>
                   <td><?=$kt->jml_prakhir?></td>
                   <td>                     
                   <?php
                   if(($this->group == 'admin')|| ($this->group == 'operator')){
-                      echo' <button data-toggle="modal"
-          data-target="#ringkasan" value="'.$kt->id_kontrak.'" id="regis" class="btn-sm p-0 btn-success" >Registrasi</button>
+                      echo' <button type="button" data-toggle="modal"
+          data-target="#ringkasan" value="'.$kt->id_kontrak.'" id="regis" class="btn-sm p-1 btn-success" >Registrasi</button>
                   <br><br>';
                   }
                   
                   if(!empty($kt->no_registrasi)){
-                      echo '<a type="button" class="btn-sm p-0 btn-primary" href="'.base_url('C_Ringkasan/cetak/'.$kt->id_kontrak).'"><i class="fa-solid fa-print"></i>Cetak</a>';
+                      echo '<a type="button" class="btn-sm p-1 btn-primary" href="'.base_url('C_Ringkasan/cetak/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-print"></i>Cetak</span></a>';
                   }
                   ?>
                   </td>

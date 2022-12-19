@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-8">
-        <h2>Laporan Realisasi Pekerjaan</h2>
+        <h2>Berita Acara Pembayaran</h2>
     </div>
     <div class="col-md-4">
         <nav aria-label="breadcrumb ">
@@ -8,10 +8,10 @@
                 <li class="breadcrumb-item"><a href="<?= base_url('home')?>">Home</a></li>
                 <?php
                 if(count($this->uri->segment_array())>1){
-                    echo '<li class="breadcrumb-item"><a href="'.base_url('realisasi').'">Realisasi</a></li>
+                    echo '<li class="breadcrumb-item"><a href="'.base_url('pembayaran').'">Pembayaran</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Data</li>';
                 }else{
-                    echo '<li class="breadcrumb-item active" aria-current="page">Realisasi</li>';
+                    echo '<li class="breadcrumb-item active" aria-current="page">Pembayaran</li>';
                 }
                 ?>
             </ol>
@@ -27,12 +27,11 @@
     <?php }?>
 </div>
 <?php
-if(empty($button) && isset($laporan)){
-    $this->load->view('component/tabel/tabel_laporan');
-}
-else if (empty($button)) {
-    $this->load->view('component/tabel/tabel_kntrkrls');
-} else {
-    $this->load->view('component/form/form_laporan');
+if (empty($button) && isset($pembayaran)) {
+    $this->load->view('component/tabel/tabel_pembayaran');
+} else if(empty ($button)){
+    $this->load->view('component/tabel/tabel_kntrkpemb');
+}else {
+    $this->load->view('component/form/form_pembayaran');
 }
 ?>

@@ -25,11 +25,12 @@ class C_Adendum extends MY_Controller {
     
     public function adendum_create($id_kontrak){
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        $data['adendum'] = (object) array('nmr_adendum'=> set_value('nmr_adendum'),'tanggal_adendum'=> set_value('tanggal_adendum'),'lama_durasi_penyerahan1'=> set_value('lama_durasi_penyerahan1'),'lama_durasi_pemeliharaan'=> set_value('lama_durasi_pemeliharaan'),'kontrak_nilai'=> set_value('kontrak_nilai'),'btk_pembayaran'=> set_value('btk_pembayaran'),'dokumen'=> set_value('dokumen'),'kendala'=> set_value('kendala'));   
+        $data['adendum'] = (object) array('nmr_adendum'=> set_value('nmr_adendum'),'tanggal_adendum'=> set_value('tanggal_adendum'),'lama_durasi_penyerahan1'=> $data['kontrak']->lama_durasi_penyerahan1,'lama_durasi_pemeliharaan'=> $data['kontrak']->lama_durasi_pemeliharaan,'kontrak_nilai'=> $data['kontrak']->kontrak_nilai,'btk_pembayaran'=> $data['kontrak']->btk_pembayaran,'dokumen'=> set_value('dokumen'),'kendala'=> set_value('kendala'));   
         $data['page'] = 'page/adendum';
         $data['action'] = base_url('C_Adendum/store/'.$data['kontrak']->id_kontrak);
         $data['button'] = 'Simpan';
         $this->load->view('main',$data);
+//        print_r(json_encode($data));
     }
     
     public function store($id_kontrak){

@@ -28,10 +28,10 @@
                   </td>
                   <td>                      
                   <?php
-                  if($kt->jml_addm == 0){
-                      echo '<a type="button" class="btn-sm p-1 btn-success" href="'.base_url('adendum/create/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-add"></i>Tambah</span></a>';
+                  if($kt->jml_pemb == 0){
+                      echo '<a type="button" class="btn-sm p-1 btn-success" href="'.base_url('pembayaran/create/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-add"></i>Tambah</span></a>';
                   }else{                      
-                      echo '<a type="button" class="btn-sm p-1 btn-primary" href="'.base_url('adendum/list/'.$kt->id_kontrak).'">Adendum</a>';
+                      echo '<a type="button" class="btn-sm p-1 btn-primary" href="'.base_url('pembayaran/list/'.$kt->id_kontrak).'">Pembayaran</a>';
                   }
                   ?>
                   </td>
@@ -47,24 +47,6 @@
    <script type="text/javascript">
     $( document ).ready(function() {
         $('#kontrakKerja').DataTable();
-        $('#cari').on('click',function(e){
-            Swal.fire({
-            title: 'Auto close alert!',
-            html: 'I will close in <b></b> milliseconds.',
-            timer: 20000,
-            timerProgressBar: true,
-            didOpen: ()=>{
-                Swal.showLoading();
-                },
-            willClose:()=>{
-                clearInterval(timerInterval);
-            }
-        }).then((reuslt)=>{
-            if(result.dismiss === Swal.DismissReason.timer){
-                console.log('colse by eye');
-            }
-        });
-        });
         
     });
     </script>

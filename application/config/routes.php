@@ -32,6 +32,11 @@ $route['realisasi/create/(:any)'] = 'C_Realisasi/realisasi_create/$1';
 $route['realisasi/edit/(:any)'] = 'C_Realisasi/realisasi_edit/$1';
 $route['realisasi/list/(:any)'] = 'C_Realisasi/realisasi/$1';
 
+$route['pembayaran'] = 'C_Pembayaran/index';
+$route['pembayaran/create/(:any)'] = 'C_Pembayaran/pembayaran_create/$1';
+$route['pembayaran/edit/(:any)'] = 'C_Pembayaran/pembayaran_update/$1';
+$route['pembayaran/list/(:any)'] = 'C_Pembayaran/pembayaran/$1';
+
 $route['adendum'] = 'C_Adendum/index';
 $route['adendum/create/(:any)'] = 'C_Adendum/adendum_create/$1';
 $route['adendum/edit/(:any)'] = 'C_Adendum/adendum_update/$1';

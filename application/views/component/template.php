@@ -15,10 +15,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Sinergi - <?=$kontrak->lls_id?></title>
   </head>
   <body>
- No Registrasi : <?=$kontrak->no_registrasi?>
+      <div style="margin: -40px"> No Registrasi : <?=$kontrak->no_registrasi?></div>
       <div class="page-print">
         <h3
           style="

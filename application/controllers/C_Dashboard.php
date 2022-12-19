@@ -11,7 +11,7 @@ class C_Dashboard extends MY_Controller {
     public function index(){
         $data['page'] = 'page/dashboard';
         $data['satker'] = $this->M_Satker->get_all();
-        $data['grafik'] = $this->data(array($this->M_Kontrak->table.'.kontrak_akhir <='=> fdatetimetodb(date('d-m-Y'))));
+        $data['grafik'] = $this->data(array($this->M_Kontrak->table.'.kontrak_akhir >='=> fdatetimetodb(date('d-m-Y'))));
         $this->load->view('main',$data);
     }
     

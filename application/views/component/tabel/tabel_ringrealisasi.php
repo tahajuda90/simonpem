@@ -1,3 +1,35 @@
+        <div class="content shadow p-4 my-4">
+            <form>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <select name="id_satker" class="custom-select">
+                                <option selected disabled value="">Satuan Kerja</option>
+                                <?php
+                                if (!empty($satker)) {
+                                    foreach ($satker as $stk) {
+                                        echo '<option value="' . $stk->id_satker . '">' . $stk->stk_nama . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <select name="mode" class="custom-select">
+                                <option selected disabled value="">Silahkan Pilih</option>
+                                <option value="1" >Selesai</option>
+                                <option value="2" >Progress</option>
+                                <option value="3" >Realisasi = 100%</option>
+                                <option value="4" >Realisasi < 100%</option>
+                            </select>
+                        </div>
+                        <div class="col-auto mb-3 align-self-end ml-auto">
+                            <button class="btn btn-primary" name="submit" type="submit">
+                                Generate
+                            </button>
+                        </div>
+                    </div>
+                </form>
+        </div>
 <div class="content shadow p-4 my-4">
 
       <table id="laporan" class="table table-striped table-bordered">
@@ -67,7 +99,36 @@
           info: true,
           autoWidth: false,
           dom: '<"container-fluid"<"row mb-2"<"col"B>><"row"<"col"l><"col"f>>>rtip',
-          buttons: ["print", "excel", "pdf", "colvis"]
+          buttons: [
+              {
+            extend: "print",
+            customize: function(win)
+            {
+ 
+                var last = null;
+                var current = null;
+                var bod = [];
+ 
+                var css = '@page { size: landscape;paper:legal}',
+                    head = win.document.head || win.document.getElementsByTagName('head')[0],
+                    style = win.document.createElement('style');
+ 
+                style.type = 'text/css';
+                style.media = 'print';
+ 
+                if (style.styleSheet)
+                {
+                  style.styleSheet.cssText = css;
+                }
+                else
+                {
+                  style.appendChild(win.document.createTextNode(css));
+                }
+ 
+                head.appendChild(style);
+         }
+      },
+                 "excel", "pdf", "colvis"]
         });
         table
           .buttons()

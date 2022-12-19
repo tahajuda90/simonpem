@@ -42,12 +42,14 @@ class C_Ringkasan extends MY_Controller{
     
     public function progress(){
         $data['kontrak'] = $this->M_Ringkasan->realisasi(array($this->M_Kontrak->table.'.kontrak_akhir >='=> fdatetimetodb(date('d-m-Y'))));
+        $data['satker'] = $this->M_Satker->get_all();
         $data['page'] = 'page/ringRealisasi';
         $this->load->view('main',$data);
     }
     
     public function realisasi(){
         $data['kontrak'] = $this->M_Ringkasan->realisasi(array($this->M_Kontrak->table.'.kontrak_akhir <='=> fdatetimetodb(date('d-m-Y'))));
+        $data['satker'] = $this->M_Satker->get_all();
         $data['page'] = 'page/ringRealisasi';
         $this->load->view('main',$data);
     }

@@ -60,3 +60,9 @@ $("#beritaAcara").datepicker({
     todayHighlight: true,
 });
 
+$("#bap").datepicker({
+    format: "dd-mm-yyyy",
+    autoclose: true,
+    todayHighlight: true,
+});
+

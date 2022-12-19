@@ -6,37 +6,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="stylesheet"
-      href="<?= base_url('assets/') ?>vendor/bootstrap-4.6.2-dist/css/bootstrap.min.css"
+      href="<?= base_url('assets/')?>vendor/bootstrap-4.6.2-dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>fontawesome/css/all.css" />
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>styles/styles.css" />
-    <link rel="stylesheet" href="<?= base_url('assets/') ?>styles/login.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/')?>fontawesome/css/all.css" />
+    <link rel="stylesheet" href="<?= base_url('assets/')?>styles/login.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
       rel="stylesheet"
     />
-    <title>Login</title>
+    <title>Sinergi - Sistem Informasi Pengendalian Dan Evaluasi Melalui Registrasi Kontrak Kota Kediri</title>
   </head>
   <body>
-    <section class="vh-100">
-      <div class="container my-4 h-100">
-        <div class="row d-flex align-items-center justify-content-center h-100">
-          <div class="col-md-8 col-lg-7 col-xl-6">
+        <section class="mx-auto">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+          <div class="d-none d-lg-block col-lg-6 hero">
             <img
-              src="<?= base_url('assets/') ?>logo-login.png"
-              class="img-fluid"
+              src="<?= base_url('assets/')?>logo-login.png"
+              class="img-fluid mt-5"
               alt="Login image"
             />
           </div>
-          <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-            <div
-              class="login-card shadow my-4 d-flex flex-column align-items-center justify-content-center"
-            >
-              <h2 class="font-weight-bold">Login Page</h2>
+          <div class="col-md-12 col-lg-6 my-5">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <div class="row align-items-center justify-content-center">
+                  <div class="col-4">
+                    <div
+                      class="d-flex align-items-center justify-content-center p-2 card-img"
+                    >
+                      <a href="">
+                        <img
+                          src="<?= base_url('assets/')?>harmoni.png"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div
+                      class="d-flex align-items-center justify-content-center p-2 card-img"
+                    >
+                      <a href="">
+                        <img
+                          src="<?= base_url('assets/')?>logo-pemkot.png"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div
+                      class="d-flex align-items-center justify-content-center p-2 card-img"
+                    >
+                      <a href="">
+                        <img
+                            src="<?= base_url('assets/')?>theservicecity.png"
+                          alt=""
+                          class="img-fluid"
+                        />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h2 class="font-weight-bold text-center text-white my-5">
+              Bagian Administrasi Pembangunan
+            </h2>
+            <div class="w-50 p-3 mx-auto">
               <form method="post" action="<?= base_url('Akses/login')?>">
-                <div class="form-group mt-5">
+                <div class="form-group">
                   <input
                     type="text"
                     name="identity"
@@ -48,16 +93,15 @@
                     >User Name</label
                   >
                 </div>
-
                 <div
                   class="form-group input-group align-items-center mt-4"
                   id="show_hide_password"
                 >
                   <input
+                    name="password"
                     type="password"
                     class="form-control"
                     id="inputPass"
-                    name="password"
                     required
                   />
                   <label class="form-control-placeholder" for="inputPass"
@@ -69,11 +113,9 @@
                     ></a>
                   </div>
                 </div>
-                <div class="d-flex justify-content-center">
-                  <button class="btn btn-primary" name="submit" type="submit">
-                    Login
-                  </button>
-                </div>
+                <button class="login-btn" name="submit" type="submit">
+                  Masuk
+                </button>
               </form>
             </div>
           </div>

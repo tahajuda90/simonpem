@@ -1,9 +1,23 @@
-.login-card {
-  border-radius: 20px;
-  width: 350px;
-  backdrop-filter: blur(14px);
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 50px;
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 121, 212, 1) 61%,
+    rgba(0, 146, 255, 1) 100%
+  );
+}
+
+.hero {
+  min-height: 100vh;
+  background-size: cover;
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 121, 212, 0) 0%,
+      rgba(146, 202, 244, 1) 99%
+    ),
+    url("../login-hero.png");
 }
 
 input {
@@ -15,7 +29,7 @@ input {
   border: none !important;
   border-bottom: 1px solid #f3e5f5 !important;
   font-size: 18px !important;
-  color: #000 !important;
+  color: #fff !important;
   font-weight: 300;
 }
 
@@ -23,9 +37,16 @@ input:focus {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border-bottom: 1px solid #333 !important;
+  border-bottom: 1px solid #fff !important;
   outline-width: 0;
   font-weight: 400;
+}
+
+.card-img {
+  width: 90px;
+  height: 90px;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .form-group {
@@ -38,7 +59,7 @@ input:focus {
   top: 0;
   padding: 7px 0 0 0;
   transition: all 300ms;
-  opacity: 0.5;
+  color: #fff;
 }
 
 .form-control:focus + .form-control-placeholder,
@@ -46,5 +67,32 @@ input:focus {
   font-size: 80%;
   transform: translate3d(0, -100%, 0);
   opacity: 1;
-  color: #0d4c92 !important;
+  color: #fff !important;
+}
+
+.input-group-addon i {
+  color: #fff;
+}
+
+.login-btn {
+  margin-top: 24px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 18px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #0096ff;
+  color: #fff;
+}
+
+.login-btn:hover {
+  background: #00d7ff;
+  color: #fff;
+}
+
+.footer {
+  color: white;
+  padding-top: 15px;
+  margin-top: auto;
 }
