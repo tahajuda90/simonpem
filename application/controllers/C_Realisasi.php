@@ -110,7 +110,7 @@ class C_Realisasi extends MY_Controller {
         if (unlink(FCPATH . '/assets/gambar/' . $bukti->image)) {
             $this->M_Bukti->delete($bukti->id_bkti);
         }
-        redirect('C_Laporan/laporan_edit/' . $id_lpr);
+        redirect('realisasi/edit/' . $id_lpr);
     }
 
 }

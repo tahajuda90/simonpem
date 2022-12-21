@@ -78,7 +78,24 @@ class C_Pembayaran extends MY_Controller {
     }
     
     public function store_edit($id_pemb){
-        
+        $this->form_validation->set_rules('no_bap', 'Nomor Berita Acara Pembayaran', 'trim|required');
+        $data['pembayaran'] = $this->M_Pembayaran->get_by_id($id_pemb); 
+        if ($this->form_validation->run() == FALSE) {
+            redirect(base_url('pembayaran/edit/'.$data['pembayaran']->id_pemb));
+        }else{
+            $bayar = $this->input->post(array('no_bap','tanggal','jns_pemb','prosentase','nilai_bayar','dokumen','keterangan'));
+            $this->M_Potongan->delete_by(array('id_pemb'=>$data['pembayaran']->id_pemb));
+            $this->upload();
+            if(isset($_FILES['dokumen']['name'])){
+                $this->upload->do_upload('dokumen');
+                $bayar['dokumen'] = $this->upload->data('file_name');
+            }
+            if($this->M_Pembayaran->update($bayar->id_pemb,$bayar)){
+                redirect(base_url('pembayaran/list/'.$bayar->id_kontrak));
+            }else{
+                redirect(base_url('pembayaran/edit/'.$bayar->id_pemb));
+            }
+        }
     }
     
     public function delete(){

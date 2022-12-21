@@ -75,6 +75,11 @@ Class MY_Model extends CI_Model{
         return $this->db->delete($this->table);
     }
     
+    function delete_by($cond){
+        $this->db->where($cond);
+        return $this->db->delete($this->table);
+    }
+    
     private function count($cond){
         //$cond is array condition
         $this->db->where($cond);

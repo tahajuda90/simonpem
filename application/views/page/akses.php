@@ -2,11 +2,11 @@
     <div class="col-md-8">
         <h2>Manajemen User</h2>
     </div>
-    <?php if($this->session->flashdata('error')){ ?>
+    <?php if($this->session->flashdata('message')){ ?>
     <div class="col-md-12">
         <div class="alert alert-dismissible alert-danger" role="alert">
             <button class="close" type="button" data-dismiss="alert">×</button>
-            This is a success alert—check it out!
+            <?=$this->session->flashdata('message')?>
         </div>
     </div>
     <?php }?>

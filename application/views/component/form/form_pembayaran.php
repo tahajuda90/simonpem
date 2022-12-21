@@ -45,8 +45,14 @@
             <label>Jenis Pembayaran</label>
             <select class="custom-select" name="jns_pemb" required>
               <option selected disabled value="">Silahkan Pilih</option>
-              <option value="0">Uang Muka</option>
-              <option value="<?=$pembayaran->btk_pembayaran?>"><?= pembayaran()[$pembayaran->btk_pembayaran]?></option>
+              <option <?=$pembayaran->btk_pembayaran=0?'selected':''?> value="0">Uang Muka</option>
+              <?php if($pembayaran->btk_pembayaran !=null){
+                  echo'<option '.$pembayaran->btk_pembayaran!=0?'selected':''.' value="'.$pembayaran->btk_pembayaran.'">'. pembayaran()[$pembayaran->btk_pembayaran].'</option>';
+              }else{
+                  foreach(pembayaran() as $key=>$pbr){
+                      echo'<option '.$pembayaran->btk_pembayaran!=$key?'selected':''.' value="'.$key.'">'.$pbr.'</option>';
+                  }
+              }?>
             </select>
             <div class="invalid-feedback">Field tidak boleh kosong.</div>
           </div>

@@ -15,7 +15,7 @@
                     type="password"
                     class="form-control"
                     id="inputPass"
-                    name="password"
+                    name="old"
                     />
                        <div class="input-group-append">
                            <a class="input-group-text" href=""

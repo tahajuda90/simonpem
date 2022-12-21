@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 17, 2022 at 08:15 PM
+-- Generation Time: Dec 19, 2022 at 01:58 PM
 -- Server version: 10.3.37-MariaDB-0ubuntu0.20.04.1
 -- PHP Version: 7.4.33
 
@@ -227,6 +227,27 @@ CREATE TABLE `pekerjaan` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembayaran`
+--
+
+CREATE TABLE `pembayaran` (
+  `id_pemb` int(11) NOT NULL,
+  `id_kontrak` bigint(20) DEFAULT NULL,
+  `id_mslh` int(11) DEFAULT NULL,
+  `no_bap` varchar(255) DEFAULT NULL,
+  `tanggal` datetime DEFAULT NULL,
+  `jns_pemb` int(11) DEFAULT NULL,
+  `prosentase` double DEFAULT NULL,
+  `nilai_bayar` bigint(20) DEFAULT NULL,
+  `dokumen` varchar(255) DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `perhitungan_akhir`
 --
 
@@ -255,6 +276,22 @@ CREATE TABLE `permasalahan` (
   `tanggal` datetime DEFAULT NULL,
   `tahapan` varchar(255) DEFAULT NULL,
   `keterangan` text DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `potongan`
+--
+
+CREATE TABLE `potongan` (
+  `id_pot` int(11) NOT NULL,
+  `id_kontrak` bigint(20) DEFAULT NULL,
+  `id_pemb` int(11) DEFAULT NULL,
+  `jns_pot` varchar(255) DEFAULT NULL,
+  `nilai_pot` bigint(20) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -336,7 +373,9 @@ CREATE TABLE `satuan_kerja` (
   `stk_kode` varchar(125) DEFAULT NULL,
   `stk_rup_id` varchar(125) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `nama_kpl` varchar(255) DEFAULT NULL,
+  `nip_kpl` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -372,7 +411,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `email`, `activation_selector`, `activation_code`, `forgotten_password_selector`, `forgotten_password_code`, `forgotten_password_time`, `remember_selector`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`) VALUES
-(1, '127.0.0.1', 'administrator', '$2y$12$Whh3RBI.I6ApyoRQds.Ho.4yA5Va0iaNfZo78CORr3F01HtF9FfXi', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1671280986, 1, 'Admin', 'istrator', 'ADMIN', '0'),
+(1, '127.0.0.1', 'administrator', '$2y$12$Whh3RBI.I6ApyoRQds.Ho.4yA5Va0iaNfZo78CORr3F01HtF9FfXi', 'admin@admin.com', NULL, '', NULL, NULL, NULL, NULL, NULL, 1268889823, 1671430613, 1, 'Admin', 'istrator', 'ADMIN', '0'),
 (2, '127.0.0.1', 'operator', '$2y$10$Nq5tomViNVG6GO4L6Ia1zOckwl.GRNvIxTjRIXuZne926NHDr3/ce', 'operator@operator1.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1670994587, 1671183094, 1, NULL, NULL, 'Pemerintah Kota Kediri', NULL),
 (3, '127.0.0.1', 'skpd', '$2y$10$ZaGEui8EqCHY1Wek1ESpwO9k/wNhIuOHH52wjJP1LfObvFE/tOR12', 'skpd@simonpem.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1671164838, 1671264072, 1, NULL, NULL, 'Pemerintah Kota Kediri', NULL);
 
@@ -397,6 +436,24 @@ INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (2, 1, 2),
 (3, 2, 2),
 (4, 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `workflow`
+--
+
+CREATE TABLE `workflow` (
+  `id_wf` int(11) NOT NULL,
+  `id_kontrak` bigint(20) DEFAULT NULL,
+  `id_lpr` int(11) DEFAULT NULL,
+  `id_pemb` int(11) DEFAULT NULL,
+  `id_addm` int(11) DEFAULT NULL,
+  `id_prakhir` int(11) DEFAULT NULL,
+  `acc` varchar(255) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -471,6 +528,12 @@ ALTER TABLE `pekerjaan`
   ADD KEY `kontrak` (`id_kontrak`);
 
 --
+-- Indexes for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  ADD PRIMARY KEY (`id_pemb`);
+
+--
 -- Indexes for table `perhitungan_akhir`
 --
 ALTER TABLE `perhitungan_akhir`
@@ -481,6 +544,12 @@ ALTER TABLE `perhitungan_akhir`
 --
 ALTER TABLE `permasalahan`
   ADD PRIMARY KEY (`id_mslh`);
+
+--
+-- Indexes for table `potongan`
+--
+ALTER TABLE `potongan`
+  ADD PRIMARY KEY (`id_pot`);
 
 --
 -- Indexes for table `ppk`
@@ -528,6 +597,12 @@ ALTER TABLE `users_groups`
   ADD KEY `fk_users_groups_groups1_idx` (`group_id`);
 
 --
+-- Indexes for table `workflow`
+--
+ALTER TABLE `workflow`
+  ADD PRIMARY KEY (`id_wf`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -553,7 +628,7 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `kontrak`
 --
 ALTER TABLE `kontrak`
-  MODIFY `id_kontrak` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kontrak` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kontrak_user`
@@ -565,7 +640,7 @@ ALTER TABLE `kontrak_user`
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id_lpr` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_lpr` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `laporan_pekerjaan`
@@ -583,13 +658,19 @@ ALTER TABLE `login_attempts`
 -- AUTO_INCREMENT for table `paket`
 --
 ALTER TABLE `paket`
-  MODIFY `id_paket` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_paket` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pekerjaan`
 --
 ALTER TABLE `pekerjaan`
   MODIFY `id_pkrj` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pembayaran`
+--
+ALTER TABLE `pembayaran`
+  MODIFY `id_pemb` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `perhitungan_akhir`
@@ -604,16 +685,22 @@ ALTER TABLE `permasalahan`
   MODIFY `id_mslh` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `potongan`
+--
+ALTER TABLE `potongan`
+  MODIFY `id_pot` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `ppk`
 --
 ALTER TABLE `ppk`
-  MODIFY `id_ppk` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ppk` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `rekanan`
 --
 ALTER TABLE `rekanan`
-  MODIFY `id_rekanan` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_rekanan` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sanksi`
@@ -625,7 +712,7 @@ ALTER TABLE `sanksi`
 -- AUTO_INCREMENT for table `satuan_kerja`
 --
 ALTER TABLE `satuan_kerja`
-  MODIFY `id_satker` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_satker` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -640,8 +727,20 @@ ALTER TABLE `users_groups`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `workflow`
+--
+ALTER TABLE `workflow`
+  MODIFY `id_wf` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `adendum`
+--
+ALTER TABLE `adendum`
+  ADD CONSTRAINT `kntrk` FOREIGN KEY (`id_kontrak`) REFERENCES `kontrak` (`id_kontrak`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `bukti`
@@ -680,6 +779,12 @@ ALTER TABLE `paket`
 --
 ALTER TABLE `pekerjaan`
   ADD CONSTRAINT `kontrak` FOREIGN KEY (`id_kontrak`) REFERENCES `kontrak` (`id_kontrak`) ON DELETE CASCADE ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `perhitungan_akhir`
+--
+ALTER TABLE `perhitungan_akhir`
+  ADD CONSTRAINT `kntrs` FOREIGN KEY (`id_kontrak`) REFERENCES `kontrak` (`id_kontrak`) ON DELETE CASCADE ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `sanksi`
