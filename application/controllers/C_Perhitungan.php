@@ -59,7 +59,7 @@ class C_Perhitungan extends MY_Controller {
     public function hitung_update($id_prakhir){
         $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
         $data['page'] = 'page/perhitungan';
-        $data['action'] = base_url('C_Perhitungan/store/'.$data['kontrak']->id_kontrak);
+        $data['action'] = base_url('C_Perhitungan/store_update/'.$data['hitung']->id_prakhir);
         $data['button'] = 'Ubah';
         $this->load->view('main',$data);
     }
