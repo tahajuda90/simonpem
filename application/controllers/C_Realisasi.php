@@ -64,15 +64,11 @@ class C_Realisasi extends MY_Controller {
     public function store_edit($id_lpr) {
         $this->form_validation->set_rules('rencana', 'Rencana', 'trim|required');
         $data['laporan'] = $this->M_Laporan->get_by_id($id_lpr);
-        $pkrj = $this->input->post($this->M_LapPeker->id_only(array('id_lpr' => $data['laporan']->id_lpr)));
         if ($this->form_validation->run() == FALSE) {
             echo json_encode(array('status' => "error", 'msg' => validation_errors()));
         } else {
             $laporan = $this->input->post(array('rencana', 'realisasi', 'keterangan', 'bulan', 'minggu', 'tanggal_awal', 'tanggal_akhir', 'kendala'));
             $this->M_Laporan->update($data['laporan']->id_lpr, $laporan);
-            foreach ($pkrj as $key => $val) {
-                $this->M_LapPeker->update($key, array('bobot' => $val));
-            }
             echo json_encode(array('status' => "success", 'id_lpr' => $data['laporan']->id_lpr));
         }
     }
