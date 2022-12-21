@@ -99,7 +99,7 @@
                   type="file"
                   class="form-control-file"
                   name="dokumen"
-                  <?php if($button !== 'Update'){echo'required';}?>
+                  <?php if($button !== 'Ubah'){echo'required';}?>
                 />
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
                 <p class="text-muted my-3">*Ubah komponen yang perlu diubah</p>

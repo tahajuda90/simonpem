@@ -60,7 +60,7 @@ class C_Perhitungan extends MY_Controller {
         $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
         $data['page'] = 'page/perhitungan';
         $data['action'] = base_url('C_Perhitungan/store/'.$data['kontrak']->id_kontrak);
-        $data['button'] = 'Simpan';
+        $data['button'] = 'Ubah';
         $this->load->view('main',$data);
     }
     

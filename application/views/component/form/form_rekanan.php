@@ -82,7 +82,7 @@
             </div>
             <div class="d-flex justify-content-end">
               <button class="btn btn-primary" name="submit" type="submit">
-                kirim
+                <?=$button?>
               </button>
             </div>
           </form>

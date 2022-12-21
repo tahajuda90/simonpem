@@ -64,7 +64,7 @@ class C_Adendum extends MY_Controller {
         $data['adendum'] = $this->M_Adendum->get_by_id($id_addm);  
         $data['page'] = 'page/adendum';
         $data['action'] = base_url('C_Adendum/store_edit/'.$data['adendum']->id_addm);
-        $data['button'] = 'Update';
+        $data['button'] = 'Ubah';
         $this->load->view('main',$data);
     }
     

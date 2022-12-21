@@ -146,7 +146,7 @@
               type="file"
               class="form-control-file"
               name="dokumen"
-              required
+              <?php if($button !== 'Ubah'){echo'required';}?>
             />
             <div class="invalid-feedback">Field tidak boleh kosong.</div>
           </div>
