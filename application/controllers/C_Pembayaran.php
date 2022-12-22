@@ -28,7 +28,7 @@ class C_Pembayaran extends MY_Controller {
     
     public function pembayaran_create($id_kontrak) {
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
-        $data['pembayaran'] = (object) array('btk_pembayaran'=>$data['kontrak']->btk_pembayaran,'no_bap'=> set_value('no_bap'),'tanggal'=> set_value('tanggal'),'jns_pemb'=> set_value('jns_pemb'),'prosentase'=> set_value('prosentase'),'nilai_bayar'=> set_value('nilai_bayar'),'dokumen'=> set_value('dokumen'),'keterangan'=> set_value('keterangan'),'kendala'=>set_value('kendala'));   
+        $data['pembayaran'] = (object) array('no_bap'=> set_value('no_bap'),'tanggal'=> set_value('tanggal'),'jns_pemb'=> $data['kontrak']->btk_pembayaran,'prosentase'=> set_value('prosentase'),'nilai_bayar'=> set_value('nilai_bayar'),'dokumen'=> set_value('dokumen'),'keterangan'=> set_value('keterangan'),'kendala'=>set_value('kendala'));   
         $data['page'] = 'page/pembayaran';
         $data['action'] = base_url('C_Pembayaran/store/'.$data['kontrak']->id_kontrak);
         $data['button'] = 'Simpan';
@@ -86,14 +86,21 @@ class C_Pembayaran extends MY_Controller {
             $bayar = $this->input->post(array('no_bap','tanggal','jns_pemb','prosentase','nilai_bayar','dokumen','keterangan'));
             $this->M_Potongan->delete_by(array('id_pemb'=>$data['pembayaran']->id_pemb));
             $this->upload();
+            if(!empty($this->input->post('jns_pot[]'))){
+                    $jns = $this->input->post('jns_pot[]');
+                    $nl = $this->input->post('nilai_pot[]');
+                    foreach($jns as $key=>$value){
+                        $this->M_Potongan->insert(array('id_pemb'=>$data['pembayaran']->id_pemb,'id_kontrak'=>$data['pembayaran']->id_kontrak,'jns_pot'=> strtolower($value),'nilai_pot'=>$nl[$key]));
+                    }
+                }
             if(isset($_FILES['dokumen']['name'])){
                 $this->upload->do_upload('dokumen');
                 $bayar['dokumen'] = $this->upload->data('file_name');
             }
             if($this->M_Pembayaran->update($bayar->id_pemb,$bayar)){
-                redirect(base_url('pembayaran/list/'.$bayar->id_kontrak));
+                redirect(base_url('pembayaran/list/'.$data['pembayaran']->id_kontrak));
             }else{
-                redirect(base_url('pembayaran/edit/'.$bayar->id_pemb));
+                redirect(base_url('pembayaran/edit/'.$data['pembayaran']->id_pemb));
             }
         }
     }

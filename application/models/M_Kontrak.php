@@ -41,11 +41,12 @@ class M_Kontrak extends MY_Model{
     }
     
     public function update($id, $data) {
-        if (array_key_exists('kontrak_tanggal|kontrak_mulai|lama_durasi_penyerahan1', $data)) {
+        $required = array('kontrak_mulai','kontrak_akhir','kontrak_tanggal');
+        if(count(array_intersect_key(array_flip($required),$data)) === count($required)){
             $data['kontrak_tanggal'] = fdatetimetodb($data['kontrak_tanggal']);
             $data['kontrak_mulai'] = fdatetimetodb($data['kontrak_mulai']);
             $data['kontrak_akhir'] = fdatetimetodb(date('Y-m-d', strtotime($data['kontrak_mulai'] . ' + ' . $data['lama_durasi_penyerahan1'] . 'days')));
-        }
+        }            
         return parent::update($id, $data);
     }
 }

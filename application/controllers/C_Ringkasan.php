@@ -60,12 +60,13 @@ class C_Ringkasan extends MY_Controller{
         $data['adendum'] = $this->M_Adendum->get_cond(array($this->M_Adendum->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
 //        $data['sanksi1'] = $this->M_Sanksi->get_cond(array($this->M_Sanksi->table.'.id_kontrak'=>$data['kontrak']->id_kontrak,$this->M_Sanksi->table.'.jns_sanksi'=>1));
 //        $data['sanksi2'] = $this->M_Sanksi->get_cond(array($this->M_Sanksi->table.'.id_kontrak'=>$data['kontrak']->id_kontrak,$this->M_Sanksi->table.'.jns_sanksi'=>2));
-        $data['pembayaran'] = $this->M_Pembayaran->get_cond(array($this->M_Pembayaran->table,'.id_kontrak'=>$data['kontrak']->id_kontrak));
+        $data['pembayaran'] = $this->M_Pembayaran->get_cond(array($this->M_Pembayaran->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
         foreach($data['pembayaran'] as $bayar){
             $bayar->potong = $this->M_Potongan->get_cond(array('id_pemb'=>$bayar->id_pemb));
         }
         $data['hitung'] = $this->M_PerAkhir->get_cond(array($this->M_PerAkhir->table.'.id_kontrak'=>$data['kontrak']->id_kontrak));
         $data['ppk'] = $this->M_Ppk->get_cond(array('ppk_id'=>$data['kontrak']->ppk_id))[0];
-        $this->pdfgenerator->generate('component/template',$data);
+//        print_r($data['pembayaran'][0]->potong);
+$this->pdfgenerator->generate('component/template',$data);
     }
 }

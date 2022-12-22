@@ -45,12 +45,13 @@
             <label>Jenis Pembayaran</label>
             <select class="custom-select" name="jns_pemb" required>
               <option selected disabled value="">Silahkan Pilih</option>
-              <option <?=$pembayaran->btk_pembayaran=0?'selected':''?> value="0">Uang Muka</option>
-              <?php if($pembayaran->btk_pembayaran !=null){
-                  echo'<option '.$pembayaran->btk_pembayaran!=0?'selected':''.' value="'.$pembayaran->btk_pembayaran.'">'. pembayaran()[$pembayaran->btk_pembayaran].'</option>';
+              <option <?=$pembayaran->jns_pemb == 0 ?'selected':'' ?> value="0">Uang Muka</option>
+              <?php 
+              if(!empty($pembayaran->jns_pemb) ){
+                  echo '<option selected value="'.$pembayaran->jns_pemb.'">'. pembayaran()[$pembayaran->jns_pemb].'</option>';
               }else{
                   foreach(pembayaran() as $key=>$pbr){
-                      echo'<option '.$pembayaran->btk_pembayaran!=$key?'selected':''.' value="'.$key.'">'.$pbr.'</option>';
+                      echo'<option '.$pembayaran->jns_pemb == $key ?'selected':'' .' value="'.$key.'">'.$pbr.'</option>';
                   }
               }?>
             </select>
@@ -62,28 +63,7 @@
           <input type="text" name="nilai_bayar" value="<?=$pembayaran->nilai_bayar?>" class="form-control" required />
           <div class="invalid-feedback">Field tidak boleh kosong.</div>
         </div>
-        <div id="dynamicForm">
-          <div class="form-row align-items-center">
-            <div class="col-md-5 mb-3">
-              <label>Jenis Potongan</label>
-              <input type="text" name="jns_pot[]" class="form-control" />
-              <div class="invalid-feedback">Field tidak boleh kosong.</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>Nilai Potongan</label>
-              <input type="text" name="nilai_pot[]" class="form-control" />
-              <div class="invalid-feedback">Field tidak boleh kosong.</div>
-            </div>
-            <div class="col-auto mb-3 align-self-end ml-auto">
-              <button id="rowAdder" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-
-          <div id="newForm">
-              <?php
+                       <?php
               if(isset($potongan)){
                   foreach($potongan as $ptg){
                       echo '<div id="dynamicForm">
@@ -109,15 +89,36 @@
               
             </div>
             <div class="col-auto mb-3 align-self-end ml-auto">
-              <button id="deleteRow" class="btn btn-danger">
-                <i class="fa-solid fa-minus"></i>
+              <button type="button" id="rowAdder" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>
               </button>
             </div>
           </div>
         </div>';
                   }
-              }
+              }else{
               ?>
+        <div id="dynamicForm">
+          <div class="form-row align-items-center">
+            <div class="col-md-5 mb-3">
+              <label>Jenis Potongan</label>
+              <input type="text" name="jns_pot[]" class="form-control" />
+              <div class="invalid-feedback">Field tidak boleh kosong.</div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Nilai Potongan</label>
+              <input type="text" name="nilai_pot[]" class="form-control" />
+              <div class="invalid-feedback">Field tidak boleh kosong.</div>
+            </div>
+            <div class="col-auto mb-3 align-self-end ml-auto">
+              <button type="button" id="rowAdder" class="btn btn-primary">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+              <?php }?>
+          <div id="newForm">
           </div>
 
         <div class="form-group">
@@ -188,7 +189,7 @@
               
             </div>
             <div class="col-auto mb-3 align-self-end ml-auto">
-              <button id="deleteRow" class="btn btn-danger">
+              <button type="button" id="deleteRow" class="btn btn-danger">
                 <i class="fa-solid fa-minus"></i>
               </button>
             </div>

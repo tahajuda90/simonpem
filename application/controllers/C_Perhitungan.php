@@ -49,9 +49,9 @@ class C_Perhitungan extends MY_Controller {
                 $done = false;
             }
             if($done){
-                redirect(base_url('hitung/list/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('perhitungan/list/'.$data['kontrak']->id_kontrak));
             }else{
-                redirect(base_url('hitung/create/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('perhitungan/create/'.$data['kontrak']->id_kontrak));
             }
         }
     }
@@ -59,7 +59,7 @@ class C_Perhitungan extends MY_Controller {
     public function hitung_update($id_prakhir){
         $data['hitung'] = $this->M_PerAkhir->get_by_id($id_prakhir);
         $data['page'] = 'page/perhitungan';
-        $data['action'] = base_url('C_Perhitungan/store_update/'.$data['hitung']->id_prakhir);
+        $data['action'] = base_url('C_Perhitungan/store_edit/'.$data['hitung']->id_prakhir);
         $data['button'] = 'Ubah';
         $this->load->view('main',$data);
     }
@@ -77,9 +77,9 @@ class C_Perhitungan extends MY_Controller {
                 $hitung['dokumen'] = $this->upload->data('file_name');
             }
             if($this->M_PerAkhir->update($data['hitung']->id_prakhir,$hitung)){
-                redirect(base_url('hitung/list/'.$data['kontrak']->id_kontrak));
+                redirect(base_url('perhitungan/list/'.$data['hitung']->id_kontrak));
             }else{
-                redirect(base_url('hitung/edit/'.$data['hitung']->id_prakhir));
+                redirect(base_url('perhitungan/edit/'.$data['hitung']->id_prakhir));
             }
         }
     }
