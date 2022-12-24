@@ -149,6 +149,7 @@
               name="dokumen"
               <?php if($button !== 'Ubah'){echo'required';}?>
             />
+            <p class="text-muted">ekstensi file upload yang diperbolehkan .pdf</p> 
             <div class="invalid-feedback">Field tidak boleh kosong.</div>
           </div>
           <div class="col-auto mb-3 align-self-end ml-auto">

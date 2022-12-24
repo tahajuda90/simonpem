@@ -1,6 +1,7 @@
 <div class="content shadow p-4 my-4">
-    <form method="post" action="<?=$action?>" enctype="multipart/form-data" class="needs-validation" novalidate>
-            <div class="form-row">
+    <form method="post" action="<?=$action?>" enctype="multipart/form-data" class="needs-validation" novalidate>                      
+        <p class="text-muted">*Ubah komponen yang perlu diubah</p>    
+        <div class="form-row">
               <div class="col-md-6 mb-3">
                 <label>Nomor Adendum</label>
                 <input
@@ -101,8 +102,8 @@
                   name="dokumen"
                   <?php if($button !== 'Ubah'){echo'required';}?>
                 />
+                <p class="text-muted">ekstensi file upload yang diperbolehkan .pdf</p>  
                 <div class="invalid-feedback">Field tidak boleh kosong.</div>
-                <p class="text-muted my-3">*Ubah komponen yang perlu diubah</p>
               </div>
               <div class="col-auto mb-3 align-self-end ml-auto">
                 <button class="btn btn-primary" name="submit" type="submit">

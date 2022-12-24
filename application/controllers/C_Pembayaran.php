@@ -94,10 +94,13 @@ class C_Pembayaran extends MY_Controller {
                     }
                 }
             if(isset($_FILES['dokumen']['name'])){
-                $this->upload->do_upload('dokumen');
-                $bayar['dokumen'] = $this->upload->data('file_name');
+                if($this->upload->do_upload('dokumen')){
+                    $bayar['dokumen'] = $this->upload->data('file_name');
+                }else{
+                    redirect(base_url('pembayaran/edit/'.$data['pembayaran']->id_pemb));
+                }                
             }
-            if($this->M_Pembayaran->update($bayar->id_pemb,$bayar)){
+            if($this->M_Pembayaran->update($data['pembayaran']->id_pemb,$bayar)){
                 redirect(base_url('pembayaran/list/'.$data['pembayaran']->id_kontrak));
             }else{
                 redirect(base_url('pembayaran/edit/'.$data['pembayaran']->id_pemb));
@@ -110,12 +113,12 @@ class C_Pembayaran extends MY_Controller {
     }
 
     function upload() {
-        $uplpath = FCPATH . '/assets/dokumen/';
+        $uplpath = FCPATH.'/assets/dokumen/';
         if (!is_dir($uplpath)) {
             mkdir($uplpath, 0777, TRUE);
         }
         $config['upload_path'] = $uplpath;
-        $config['allowed_types'] = 'pdf';
+        $config['allowed_types'] = 'rar|zip|pdf';
 //		$config['max_size']             = 10000;
         $config['encrypt_name'] = TRUE;
 //                $config['file_name']            = 'custom';
