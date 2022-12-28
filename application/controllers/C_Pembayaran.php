@@ -53,7 +53,9 @@ class C_Pembayaran extends MY_Controller {
                     $jns = $this->input->post('jns_pot[]');
                     $nl = $this->input->post('nilai_pot[]');
                     foreach($jns as $key=>$value){
-                        $this->M_Potongan->insert(array('id_pemb'=>$id_pemb,'id_kontrak'=>$data['kontrak']->id_kontrak,'jns_pot'=> strtolower($value),'nilai_pot'=>$nl[$key]));
+                        if (!empty($value)) {
+                            $this->M_Potongan->insert(array('id_pemb' => $id_pemb, 'id_kontrak' => $data['kontrak']->id_kontrak, 'jns_pot' => strtolower($value), 'nilai_pot' => $nl[$key]));
+                        }
                     }
                 }
                 $done = true;
@@ -90,15 +92,15 @@ class C_Pembayaran extends MY_Controller {
                     $jns = $this->input->post('jns_pot[]');
                     $nl = $this->input->post('nilai_pot[]');
                     foreach($jns as $key=>$value){
-                        $this->M_Potongan->insert(array('id_pemb'=>$data['pembayaran']->id_pemb,'id_kontrak'=>$data['pembayaran']->id_kontrak,'jns_pot'=> strtolower($value),'nilai_pot'=>$nl[$key]));
+                        if(!empty($value)){
+                           $this->M_Potongan->insert(array('id_pemb'=>$data['pembayaran']->id_pemb,'id_kontrak'=>$data['pembayaran']->id_kontrak,'jns_pot'=> strtolower($value),'nilai_pot'=>$nl[$key])); 
+                        }
                     }
                 }
             if(isset($_FILES['dokumen']['name'])){
                 if($this->upload->do_upload('dokumen')){
                     $bayar['dokumen'] = $this->upload->data('file_name');
-                }else{
-                    redirect(base_url('pembayaran/edit/'.$data['pembayaran']->id_pemb));
-                }                
+                }               
             }
             if($this->M_Pembayaran->update($data['pembayaran']->id_pemb,$bayar)){
                 redirect(base_url('pembayaran/list/'.$data['pembayaran']->id_kontrak));

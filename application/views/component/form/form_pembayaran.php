@@ -63,41 +63,6 @@
           <input type="text" name="nilai_bayar" value="<?=$pembayaran->nilai_bayar?>" class="form-control" required />
           <div class="invalid-feedback">Field tidak boleh kosong.</div>
         </div>
-                       <?php
-              if(isset($potongan)){
-                  foreach($potongan as $ptg){
-                      echo '<div id="dynamicForm">
-          <div class="form-row align-items-center">
-            <div class="col-md-5 mb-3">
-              <label>Jenis Potongan</label>
-              <input
-                type="text"
-                name="jns_pot[]"
-                class="form-control"
-                value="'.$ptg->jns_pot.'"
-              />
-              
-            </div>
-            <div class="col-md-6 mb-3">
-              <label>Nilai Potongan</label>
-              <input
-                type="text"
-                name="nilai_pot[]"
-                class="form-control"
-                value="'.$ptg->nilai_pot.'"
-              />
-              
-            </div>
-            <div class="col-auto mb-3 align-self-end ml-auto">
-              <button type="button" id="rowAdder" class="btn btn-primary">
-                <i class="fa-solid fa-plus"></i>
-              </button>
-            </div>
-          </div>
-        </div>';
-                  }
-              }else{
-              ?>
         <div id="dynamicForm">
           <div class="form-row align-items-center">
             <div class="col-md-5 mb-3">
@@ -117,8 +82,42 @@
             </div>
           </div>
         </div>
-              <?php }?>
           <div id="newForm">
+                          <?php
+              if(isset($potongan)){
+                  foreach($potongan as $ptg){
+             ?><div id="dynamicForm">
+          <div class="form-row align-items-center">
+            <div class="col-md-5 mb-3">
+              <label>Jenis Potongan</label>
+              <input
+                type="text"
+                name="jns_pot[]"
+                class="form-control"
+                value="<?=$ptg->jns_pot?>"
+              />
+              
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Nilai Potongan</label>
+              <input
+                type="text"
+                name="nilai_pot[]"
+                class="form-control"
+                value="<?=$ptg->nilai_pot?>"
+              />
+              
+            </div>
+            <div class="col-auto mb-3 align-self-end ml-auto">
+              <button type="button" id="deleteRow" class="btn btn-danger">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+           <?php       }
+              }
+              ?>                    
           </div>
 
         <div class="form-group">
@@ -164,6 +163,7 @@
 <script src="<?= base_url('assets/') ?>script/validateForm.js"></script>
 <script src="<?= base_url('assets/') ?>script/datePicker.js"></script>
  <script type="text/javascript">
+     $(document).ready(function () {
       $("#rowAdder").click(function () {
         console.log("tambah");
         newRowAdd = `
@@ -196,9 +196,10 @@
             </div>
           </div>
         </div>`;
-        $("#newForm").append(newRowAdd);
-        $("body").on("click", "#deleteRow", function () {
+        $("#newForm").append(newRowAdd);        
+      });
+      $("body").on("click", "#deleteRow", function () {
           $(this).parents("#dynamicForm").remove();
         });
-      });
+  });
     </script>

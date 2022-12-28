@@ -44,7 +44,7 @@ class C_Realisasi extends MY_Controller {
             $laporan['id_kontrak'] = $data['kontrak']->id_kontrak;
             $id_lpr = $this->M_Laporan->insert_id($laporan);
             if (isset($id_lpr)) {
-                echo json_encode(array('status' => "success", 'id_lpr' => $id_lpr));
+                echo json_encode(array('status' => "success",'id_lpr' => $id_lpr));
             } else {
                 echo json_encode(array('status' => "error", 'msg' => 'tidak masuk'));
             }
@@ -69,7 +69,7 @@ class C_Realisasi extends MY_Controller {
         } else {
             $laporan = $this->input->post(array('rencana', 'realisasi', 'keterangan', 'bulan', 'minggu', 'tanggal_awal', 'tanggal_akhir', 'kendala'));
             $this->M_Laporan->update($data['laporan']->id_lpr, $laporan);
-            echo json_encode(array('status' => "success", 'id_lpr' => $data['laporan']->id_lpr));
+            echo json_encode(array('status' => "success", 'id_lpr' => $data['laporan']->id_lpr,'id_kontrak'=>$data['laporan']->id_kontrak));
         }
     }
 

@@ -230,7 +230,13 @@ $(document).ready(function () {
                             if(myDropzone.files.length > 0 ){
                                 myDropzone.processQueue();
                             }else{
-                                window.location.href = "<?= base_url('realisasi/laporan/edit/')?>"+hasil.id_lpr;
+                                <?php
+                                if($button == 'Ubah'){
+                                    echo 'window.location.href = "'.base_url('realisasi/list/').'"+hasil.id_kontrak;';
+                                }else{
+                                    echo 'window.location.href = "'.base_url('realisasi/edit/').'"+hasil.id_lpr;';
+                                }
+                                ?>
                             }                            
                         }else{
                             console.log("error");

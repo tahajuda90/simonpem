@@ -57,21 +57,23 @@
     
     const ctx = document.getElementById("myChart");
     const data = <?=$grafik?>;
-    console.log(data.legend);
-new Chart(ctx, {
+    console.log(data);
+    
+var mychart = new Chart(ctx, {
   type: "bar",
-  data: {
+  data:{
       labels:data.label,
       datasets:[{
             label: data.legend[0],
-            data: data.data[0]
+            data: data.data[data.legend[0]]
             },{
             label: data.legend[1],
-            data: data.data[1]
+            data: data.data[data.legend[1]]
             }]
   },
   options: {
-    responsive: true  }
+    responsive: true
+  }
 });
     });
 </script>
