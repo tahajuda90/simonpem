@@ -9,12 +9,13 @@ class M_Pembayaran extends MY_Model{
     
     public function __construct() {
         parent::__construct();
-        $this->load->model(array('M_Kontrak','M_Masalah','M_Potongan'));
+        $this->load->model(array('M_Kontrak','M_Masalah','M_Potongan','M_Penilaian'));
     }
     
     public function kontrak(){
-        $this->db->select('count('.$this->table.'.id_pemb'.') as jml_pemb');
+        $this->db->select('count(distinct('.$this->table.'.id_pemb'.')) as jml_pemb,count(distinct('.$this->M_Penilaian->table.'.id_nilai)) as jml_nil');
         $this->db->join($this->table,$this->table.'.id_kontrak = '.$this->M_Kontrak->table.'.id_kontrak','LEFT');
+        $this->db->join($this->M_Penilaian->table,$this->M_Penilaian->table.'.id_kontrak = '.$this->M_Kontrak->table.'.id_kontrak','LEFT');
         $this->db->group_by($this->M_Kontrak->table.'.id_kontrak');
         return $this->M_Kontrak->get_all();
     }

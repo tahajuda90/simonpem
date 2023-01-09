@@ -1,3 +1,4 @@
+<?php if(($this->group <> 'skpd' )|| empty($kontrak->btk_pembayaran)){?>
 <div class="content shadow p-4 my-4">
     <form class="needs-validation" method="POST" action="<?=$action?>" novalidate>
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -578,6 +579,232 @@
         </div>
     </form>
 </div>
+<?php }else{?>
+<div class="content shadow p-4 my-4">
+    <form class="needs-validation" method="POST" action="<?=$action?>" novalidate>
+                        <div class="form-group">
+                    <label>Satuan Kerja</label>
+                    <select class="custom-select" name="id_satker" required>
+                        <option selected disabled value="">Silahkan Pilih</option>
+                        <?php
+                        if(count($sel['satker'])!=0){
+                            foreach($sel['satker'] as $stk){ ?>
+                        <option <?= $paket->id_satker == $stk->id_satker ? 'selected' : ''?> value="<?=$stk->id_satker?>"><?=$stk->stk_nama?></option>   
+                        <?php    }
+                        }
+                        ?>
+                    </select>
+                    <div class="invalid-feedback">Pilih salah satu.</div>
+                </div>
+                <div class="form-group">
+                    <label>Nama Paket Pekerjaan</label>
+                    <input
+                        type="text"
+                        name="pkt_nama"
+                        class="form-control"
+                        required
+                        value="<?=$paket->pkt_nama?>"
+                        />
+                    <div class="invalid-feedback">Field tidak boleh kosong.</div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Kode RUP</label>
+                        <input
+                            type="text"
+                            name="rup_id"
+                            class="form-control"
+                            required
+                            value="<?=$paket->rup_id?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Kode Tender</label>
+                        <input
+                            type="text"
+                            name="lls_id"
+                            class="form-control"
+                            required
+                            value="<?=$paket->lls_id?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Sumber Dana</label>
+                        <input
+                            type="text"
+                            name="sbd_id"
+                            class="form-control"
+                            required
+                            value="<?=$paket->sbd_id?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Tahun Anggaran</label>
+                        <input
+                            type="text"
+                            name="ang_tahun"
+                            class="form-control"
+                            required
+                            value="<?=$paket->ang_tahun?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Metode Pemilihan</label>
+                    <select
+                        class="custom-select"
+                        name="metode_pengadaan"
+                        required
+                        >
+                        <option selected disabled value="">Silahkan Pilih</option>
+                        <?php
+                        foreach(metode() as $key=>$val){ ?>
+                        <option <?= $paket->metode_pengadaan == $key ? 'selected' : '' ?> value="<?=$key?>"><?=$val?></option>
+                        <?php }
+                        ?>
+                    </select>
+                    <div class="invalid-feedback">Pilih salah satu.</div>
+                </div>
+                <div class="form-group">
+                    <label>Pagu Anggaran</label>
+                    <input
+                        type="text"
+                        name="pkt_pagu"
+                        class="form-control"
+                        required
+                        value="<?=$paket->pkt_pagu?>"
+                        />
+                    <div class="invalid-feedback">Field tidak boleh kosong.</div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Tanggal Rencana Pengadaan</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span
+                                    class="input-group-text"
+                                    style="cursor: pointer"
+                                    onclick="$('#perencanaan').focus();"
+                                    ><i class="fa-solid fa-calendar"></i
+                                    ></span>
+                            </div>
+                            <input
+                                type="text"
+                                id="perencanaan"
+                                name="tanggal_awal_pengadaan"
+                                class="form-control"
+                                required
+                                value="<?= strlen($paket->tanggal_awal_pengadaan) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $paket->tanggal_awal_pengadaan) ?>"
+                                />
+                            <div class="invalid-feedback">
+                                Field tidak boleh kosong.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Tanggal Realisasi Pengadaan</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span
+                                    class="input-group-text"
+                                    style="cursor: pointer"
+                                    onclick="$('#pengadaan').focus();"
+                                    ><i class="fa-solid fa-calendar"></i
+                                    ></span>
+                            </div>
+                            <input
+                                type="text"
+                                id="pengadaan"
+                                name="jadwal_awal_pengumuman"
+                                class="form-control"
+                                required
+                                value="<?= strlen($paket->jadwal_awal_pengumuman) == 0 ? date('d-m-Y') : fdateformat('d-m-Y', $paket->jadwal_awal_pengumuman)?>"
+                                />
+                            <div class="invalid-feedback">
+                                Field tidak boleh kosong.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Lokasi Pekerjaan</label>
+                    <input
+                        type="text"
+                        name="pkt_lokasi"
+                        class="form-control"
+                        required
+                        value="<?=$paket->pkt_lokasi?>"
+                        />
+                    <div class="invalid-feedback">Field tidak boleh kosong.</div>
+                </div>
+<!--                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label>Latitude</label>
+                        <input
+                            type="text"
+                            name="latitude"
+                            class="form-control"
+                            required
+                            value="<?=$paket->latitude?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Longitude</label>
+                        <input
+                            type="text"
+                            name="longitude"
+                            class="form-control"
+                            required
+                            value="<?=$paket->longitude?>"
+                            />
+                        <div class="invalid-feedback">
+                            Field tidak boleh kosong.
+                        </div>
+                    </div>
+                </div>-->
+                <div class="form-group">
+                    <label>Alamat Lokasi</label>
+                    <textarea
+                        class="form-control"
+                        name="alamat_lokasi"
+                        rows="5"
+                        required
+                        ><?=$paket->alamat_lokasi?></textarea>
+                    <div class="invalid-feedback">Field tidak boleh kosong.</div>
+                </div>
+    </form>
+</div>
+<?php    
+}?>
 <script src="<?= base_url('assets/') ?>vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url('assets/') ?>vendor/sweetalert2/sweetalert2.min.js"></script>
 <script src="<?= base_url('assets/') ?>script/validateForm.js"></script>
 <script src="<?= base_url('assets/') ?>script/datePicker.js"></script>
+<?php if(empty($kontrak->btk_pembayaran)){ ?>
+<script type="text/javascript">
+    $( document ).ready(function() {
+        Swal.fire(
+        'Lengkapi Data',
+        'Lengkapi data bentuk pembayaran pada kontrak !',
+        'question'
+      );
+    });
+</script>
+<?php } ?>

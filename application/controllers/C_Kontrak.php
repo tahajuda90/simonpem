@@ -60,25 +60,34 @@ class C_Kontrak extends MY_Controller {
         $this->load->view('main',$data);  
     }
     
-    public function store_edit($id_kontrak){
+    public function store_edit($id_kontrak) {
         $data['kontrak'] = $this->M_Kontrak->get_by_id($id_kontrak);
         $this->form_validation->set_rules('lls_id', 'Kode Tender', 'trim|required');
-        $this->form_validation->set_rules('kontrak_no', 'Nomor Kontrak', 'trim|required');
+//        $this->form_validation->set_rules('kontrak_no', 'Nomor Kontrak', 'trim|required');
+        $msuk = true;
         if ($this->form_validation->run() == FALSE) {
             $this->edit($data['kontrak']->id_kontrak);
         } else {
-            $paket = $this->input->post(array('id_satker', 'lls_id', 'rup_id', 'metode_pengadaan', 'sbd_id', 'ang_tahun', 'pkt_nama', 'pkt_pagu', 'tanggal_awal_pengadaan', 'jadwal_awal_pengumuman', 'pkt_lokasi', 'alamat_lokasi'));
-            $rekanan = $this->input->post(array('rkn_nama', 'rkn_alamat', 'rkn_npwp', 'lhk_no', 'lhk_tanggal', 'lhk_notaris'));
-            $kontrak = $this->input->post(array('kontrak_no', 'kontrak_tanggal', 'kontrak_nilai', 'kontrak_mulai', 'kontrak_akhir', 'kode_akun_kegiatan', 'kontrak_jabatan_wakil', 'kontrak_wakil_penyedia', 'lama_durasi_penyerahan1', 'lama_durasi_pemeliharaan','btk_pembayaran'));
-            $msuk = $this->M_Paket->update($data['kontrak']->id_paket,$paket) && $this->M_Rekanan->update($data['kontrak']->id_rekanan,$rekanan);
-            if($msuk && $this->M_Kontrak->update($data['kontrak']->id_kontrak,$kontrak)){
+        if (($this->group <> 'skpd' ) || empty($data['kontrak']->btk_pembayaran)) {
+                $paket = $this->input->post(array('id_satker', 'lls_id', 'rup_id', 'metode_pengadaan', 'sbd_id', 'ang_tahun', 'pkt_nama', 'pkt_pagu', 'tanggal_awal_pengadaan', 'jadwal_awal_pengumuman', 'pkt_lokasi', 'alamat_lokasi'));
+                $rekanan = $this->input->post(array('rkn_nama', 'rkn_alamat', 'rkn_npwp', 'lhk_no', 'lhk_tanggal', 'lhk_notaris'));
+                $kontrak = $this->input->post(array('kontrak_no', 'kontrak_tanggal', 'kontrak_nilai', 'kontrak_mulai', 'kontrak_akhir', 'kode_akun_kegiatan', 'kontrak_jabatan_wakil', 'kontrak_wakil_penyedia', 'lama_durasi_penyerahan1', 'lama_durasi_pemeliharaan', 'btk_pembayaran'));
+                $msuk && $this->M_Paket->update($data['kontrak']->id_paket, $paket);
+                $msuk && $this->M_Rekanan->update($data['kontrak']->id_rekanan, $rekanan);
+                $msuk && $this->M_Kontrak->update($data['kontrak']->id_kontrak, $kontrak);
+            } else {
+                $paket = $this->input->post(array('id_satker', 'lls_id', 'rup_id', 'metode_pengadaan', 'sbd_id', 'ang_tahun', 'pkt_nama', 'pkt_pagu', 'tanggal_awal_pengadaan', 'jadwal_awal_pengumuman', 'pkt_lokasi', 'alamat_lokasi'));
+                $msuk && $this->M_Paket->update($data['kontrak']->id_paket, $paket);
+            }
+
+            if ($msuk) {
                 redirect('kontrak');
-            }else{
-                redirect('kontrak/edit/'.$data['kontrak']->id_kontrak);
+            } else {
+                redirect('kontrak/edit/' . $data['kontrak']->id_kontrak);
             }
         }
     }
-    
+
     public function delete(){
         
     }

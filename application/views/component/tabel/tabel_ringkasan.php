@@ -41,7 +41,7 @@
                   <br><br>';
                   }
                   
-                  if(!empty($kt->no_registrasi)){
+                  if(!empty($kt->no_registrasi) && ($kt->jml_pemb > 0)){
                       echo '<a type="button" class="btn-sm p-1 btn-primary" href="'.base_url('C_Ringkasan/cetak/'.$kt->id_kontrak).'"><span><i class="fa-solid fa-print"></i>Cetak</span></a>';
                   }
                   ?>

@@ -175,13 +175,13 @@ w<!DOCTYPE html>
             }
             $no++;}}
             if(!empty($adendum)){ 
-                echo '<tr>
+                foreach($adendum as $aden){
+                     echo '<tr>
               <td style="width: 5%">'.$no.'.</td>
               <td style="width: 50%">Addendum Kontrak</td>
               <td style="width: 5%; text-align: center">:</td>
               <td style="width: 45%"></td>
             </tr>';
-                foreach($adendum as $aden){
                 ?>
             <tr>
               <td style="width: 5%"></td>
